@@ -7,17 +7,17 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.cvaccari.features.databinding.ShowInfoItemBinding
-import com.cvaccari.features.search.data.model.ShowWrapper
+import com.cvaccari.features.search.data.model.ShowInfoModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-class ShowsAdapter: ListAdapter<ShowWrapper, ShowsAdapter.ShowInfoViewHolder>(ShowsItemDiffCallback()) {
+class ShowsAdapter: ListAdapter<ShowInfoModel, ShowsAdapter.ShowInfoViewHolder>(ShowsItemDiffCallback()) {
 
     private val adapterScope = CoroutineScope(Dispatchers.Default)
 
-    fun addAddItemAndSubmitList(list: List<ShowWrapper>?) {
+    fun addAddItemAndSubmitList(list: List<ShowInfoModel>?) {
         adapterScope.launch {
             withContext(Dispatchers.Main) {
                 submitList(list)
@@ -34,8 +34,8 @@ class ShowsAdapter: ListAdapter<ShowWrapper, ShowsAdapter.ShowInfoViewHolder>(Sh
     }
 
     class ShowInfoViewHolder private constructor(private val binding: ShowInfoItemBinding): RecyclerView.ViewHolder(binding.root) {
-        fun bind(showWrapper: ShowWrapper) {
-            binding.showInfo = showWrapper.show
+        fun bind(showWrapper: ShowInfoModel) {
+            binding.showInfo = showWrapper
             binding.executePendingBindings()
         }
 
@@ -52,16 +52,16 @@ class ShowsAdapter: ListAdapter<ShowWrapper, ShowsAdapter.ShowInfoViewHolder>(Sh
     }
 }
 
-class ShowsItemDiffCallback: DiffUtil.ItemCallback<ShowWrapper>() {
+class ShowsItemDiffCallback: DiffUtil.ItemCallback<ShowInfoModel>() {
     override fun areItemsTheSame(
-        oldItem: ShowWrapper, newItem: ShowWrapper
+        oldItem: ShowInfoModel, newItem: ShowInfoModel
     ): Boolean {
-        return oldItem.show.id == newItem.show.id
+        return oldItem.id == newItem.id
     }
 
     override fun areContentsTheSame(
-        oldItem: ShowWrapper, newItem: ShowWrapper
+        oldItem: ShowInfoModel, newItem: ShowInfoModel
     ): Boolean {
-        return oldItem.show == newItem.show
+        return oldItem == newItem
     }
 }

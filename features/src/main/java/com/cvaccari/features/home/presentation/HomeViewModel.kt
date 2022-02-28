@@ -1,40 +1,33 @@
-package com.cvaccari.features.search.presentation
+package com.cvaccari.features.home.presentation
 
-import androidx.appcompat.widget.SearchView
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.cvaccari.commons.base.BaseViewModel
-import com.cvaccari.commons.utils.DebouncingQueryTextListener
 import com.cvaccari.core_network.networkresponse.onFailure
 import com.cvaccari.core_network.networkresponse.onSuccess
+import com.cvaccari.features.home.domain.HomeUseCase
 import com.cvaccari.features.search.data.model.ShowInfoModel
-import com.cvaccari.features.search.data.model.ShowWrapper
-import com.cvaccari.features.search.domain.SearchUseCase
 import kotlinx.coroutines.launch
 
-class SearchViewModel(
-    private val useCase: SearchUseCase
+class HomeViewModel(
+    private val useCase: HomeUseCase
 ) : BaseViewModel() {
 
     private val _showsItems = MutableLiveData<List<ShowInfoModel>>()
     val showsItems: LiveData<List<ShowInfoModel>>
         get() = _showsItems
 
-    private fun onQueryChanged(query: String) {
+    override fun onCreate() {
+        super.onCreate()
         viewModelScope.launch {
-            useCase.querySeries(query)
+            useCase.getSeries()
                 .onSuccess {
                     _showsItems.postValue(it)
                 }
                 .onFailure {
-
+                    it.printStackTrace()
                 }
         }
     }
-
-    val onQueryTextListener = DebouncingQueryTextListener(viewModelScope.coroutineContext,
-        onDebouncingQueryTextChange = {it?.let { onQueryChanged(query = it) }},
-        onClearTextClicked = {_showsItems.postValue(listOf())}
-    )
 }
