@@ -1,5 +1,6 @@
 package com.cvaccari.features.search.presentation
 
+import androidx.appcompat.widget.SearchView
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
@@ -32,7 +33,8 @@ class SearchViewModel(
         }
     }
 
-    val onQueryTextListener = DebouncingQueryTextListener(viewModelScope.coroutineContext) {
-        it?.let { onQueryChanged(query = it) }
-    }
+    val onQueryTextListener = DebouncingQueryTextListener(viewModelScope.coroutineContext,
+        onDebouncingQueryTextChange = {it?.let { onQueryChanged(query = it) }},
+        onClearTextClicked = {_showsItems.postValue(listOf())}
+    )
 }

@@ -13,6 +13,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="#E5E5E5"
         tools:context="com.cvaccari.features.search.presentation.SearchFragment">
 
         <androidx.appcompat.widget.SearchView

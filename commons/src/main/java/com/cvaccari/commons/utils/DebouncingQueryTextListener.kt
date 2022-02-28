@@ -11,7 +11,8 @@ import kotlinx.coroutines.launch
 
 class DebouncingQueryTextListener(
     coroutineContext: CoroutineContext,
-    private val onDebouncingQueryTextChange: (String?) -> Unit
+    private val onDebouncingQueryTextChange: (String?) -> Unit,
+    private val onClearTextClicked : () -> Unit
 ) : SearchView.OnQueryTextListener {
     var debouncePeriod: Long = 1000
 
@@ -24,11 +25,15 @@ class DebouncingQueryTextListener(
     }
 
     override fun onQueryTextChange(newText: String?): Boolean {
-        searchJob?.cancel()
-        searchJob = coroutineScope.launch {
-            newText?.let {
-                delay(debouncePeriod)
-                onDebouncingQueryTextChange(newText)
+        if(newText?.isEmpty() == true) {
+            onClearTextClicked()
+        } else {
+            searchJob?.cancel()
+            searchJob = coroutineScope.launch {
+                newText?.let {
+                    delay(debouncePeriod)
+                    onDebouncingQueryTextChange(newText)
+                }
             }
         }
         return false
