@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.cvaccari.features.search.presentation.SearchViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context="com.cvaccari.features.search.presentation.SearchFragment">
+
+        <androidx.appcompat.widget.SearchView
+            android:id="@+id/searchview"
+            bindQueryTextListener="@{viewModel.onQueryTextListener}"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_margin="@dimen/size_medium"
+            android:background="@drawable/bg_white_rounded"
+            app:layout_constraintTop_toTopOf="parent"
+            app:queryHint="Search by serie name"
+            app:submitBackground="@drawable/bg_white_rounded" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            entries="@{viewModel.showsItems}"
+            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+            app:spanCount="2"
+            android:layout_marginTop="@dimen/size_medium"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/searchview" />
+
+        <include
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:id="@+id/container_loading"
+            layout="@layout/loading_container"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/searchview" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

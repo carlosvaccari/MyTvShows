@@ -13,8 +13,8 @@ class GlideModule : AppGlideModule() {
     override fun applyOptions(context: Context, builder: GlideBuilder) {
         builder.setDefaultRequestOptions(
             RequestOptions().format(DecodeFormat.PREFER_ARGB_8888)
-                .error(R.drawable.baseline_thermostat_20)
-                .placeholder(R.drawable.baseline_thermostat_20)
+//                .error(R.drawable.baseline_thermostat_20)
+//                .placeholder(R.drawable.baseline_thermostat_20)
         )
     }
 }
