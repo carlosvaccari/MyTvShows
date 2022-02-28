@@ -3,6 +3,7 @@ object Config {
     object AndroidClassPath {
         const val kotlin_plugin = "org.jetbrains.kotlin:kotlin-gradle-plugin:${Versions.ClassPath.kotlinPlugin}"
         const val gradle_plugin = "com.android.tools.build:gradle:${Versions.ClassPath.gradle_plugin}"
+        const val safeArgs = "androidx.navigation:navigation-safe-args-gradle-plugin:${Versions.Navigation.core}"
     }
 
     object GradleConfigData {

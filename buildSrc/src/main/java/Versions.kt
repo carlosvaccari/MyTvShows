@@ -39,6 +39,10 @@ object Versions {
         const val glide = "4.10.0"
     }
 
+    object Navigation {
+        const val core = "2.4.1"
+    }
+
     object Test {
         const val test_runner = "1.4.0"
         const val test_rules = "1.4.0"

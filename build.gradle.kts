@@ -6,7 +6,7 @@ buildscript {
     dependencies {
         classpath(Config.AndroidClassPath.kotlin_plugin)
         classpath(Config.AndroidClassPath.gradle_plugin)
-        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:1.5.20")
+        classpath(Config.AndroidClassPath.safeArgs)
     }
 }
 
@@ -20,8 +20,6 @@ allprojects {
 
 fun Project.configureAndroid() {
     val isAppModule = name == "app"
-
-    println(">>>>>>>> " + name)
 
     when {
         isAppModule -> configureAppAndroid()

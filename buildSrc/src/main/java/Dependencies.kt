@@ -75,6 +75,11 @@ object Dependencies {
         const val fragmentTest = "androidx.fragment:fragment-testing:${Versions.Test.fragment_testing}"
     }
 
+    object Navigation {
+        const val navigationFragment = "androidx.navigation:navigation-fragment-ktx:${Versions.Navigation.core}"
+        const val navigationKtx = "androidx.navigation:navigation-ui-ktx:${Versions.Navigation.core}"
+    }
+
     val modules: List<String> by lazy {
         Module::class.memberProperties.map {
             it.name.replace("_", "-")
@@ -98,6 +103,11 @@ object Dependencies {
             Koin.android,
             Koin.scope,
             Koin.viewmodel
+        )
+
+        val navigation = listOf(
+            Navigation.navigationFragment,
+            Navigation.navigationKtx
         )
 
         val unitTest = listOf(

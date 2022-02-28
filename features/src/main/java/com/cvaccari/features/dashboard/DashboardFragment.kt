@@ -1,4 +1,4 @@
-package com.cvaccari.mytvseries.ui.dashboard
+package com.cvaccari.features.ui.dashboard
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,7 +8,6 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import com.cvaccari.mytvseries.R
 import com.cvaccari.mytvseries.databinding.FragmentDashboardBinding
 
 class DashboardFragment : Fragment() {
