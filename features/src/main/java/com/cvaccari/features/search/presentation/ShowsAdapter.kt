@@ -2,7 +2,6 @@ package com.cvaccari.features.search.presentation
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -13,14 +12,15 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-class ShowsAdapter: ListAdapter<ShowInfoModel, ShowsAdapter.ShowInfoViewHolder>(ShowsItemDiffCallback()) {
+class ShowsAdapter :
+    ListAdapter<ShowInfoModel, ShowsAdapter.ShowInfoViewHolder>(ShowsItemDiffCallback()) {
 
     private val adapterScope = CoroutineScope(Dispatchers.Default)
 
-    fun addAddItemAndSubmitList(list: List<ShowInfoModel>?) {
+    fun addAddItemAndSubmitList(list: List<ShowInfoModel>) {
         adapterScope.launch {
             withContext(Dispatchers.Main) {
-                submitList(list)
+                submitList(currentList + list)
             }
         }
     }
@@ -33,7 +33,8 @@ class ShowsAdapter: ListAdapter<ShowInfoModel, ShowsAdapter.ShowInfoViewHolder>(
         holder.bind(getItem(position))
     }
 
-    class ShowInfoViewHolder private constructor(private val binding: ShowInfoItemBinding): RecyclerView.ViewHolder(binding.root) {
+    class ShowInfoViewHolder private constructor(private val binding: ShowInfoItemBinding) :
+        RecyclerView.ViewHolder(binding.root) {
         fun bind(showWrapper: ShowInfoModel) {
             binding.showInfo = showWrapper
             binding.executePendingBindings()
@@ -52,7 +53,7 @@ class ShowsAdapter: ListAdapter<ShowInfoModel, ShowsAdapter.ShowInfoViewHolder>(
     }
 }
 
-class ShowsItemDiffCallback: DiffUtil.ItemCallback<ShowInfoModel>() {
+class ShowsItemDiffCallback : DiffUtil.ItemCallback<ShowInfoModel>() {
     override fun areItemsTheSame(
         oldItem: ShowInfoModel, newItem: ShowInfoModel
     ): Boolean {

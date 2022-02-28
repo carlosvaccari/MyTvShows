@@ -11,6 +11,7 @@ android {
 
 dependencies {
     implementation(project(Dependencies.Module.core_network))
+    implementation(project(Dependencies.Module.core_views))
     implementation(project(Dependencies.Module.commons))
     implementation(Dependencies.Kotlin.core)
     implementation(Dependencies.Kotlin.coroutines)

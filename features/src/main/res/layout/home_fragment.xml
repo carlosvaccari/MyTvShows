@@ -16,10 +16,11 @@
         android:background="#E5E5E5"
         tools:context="com.cvaccari.features.home.presentation.HomeFragment">
 
-        <androidx.recyclerview.widget.RecyclerView
+        <com.cvaccari.core_views.recyclerview.PagingRecyclerView
             android:layout_width="match_parent"
             android:layout_height="0dp"
             entries="@{viewModel.showsItems}"
+            bindListener="@{viewModel.listPagingListener}"
             app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
             app:spanCount="2"
             android:layout_marginTop="@dimen/size_medium"

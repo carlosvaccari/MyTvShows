@@ -1,6 +1,5 @@
 package com.cvaccari.features.search.presentation
 
-import androidx.appcompat.widget.SearchView
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
@@ -9,7 +8,6 @@ import com.cvaccari.commons.utils.DebouncingQueryTextListener
 import com.cvaccari.core_network.networkresponse.onFailure
 import com.cvaccari.core_network.networkresponse.onSuccess
 import com.cvaccari.features.search.data.model.ShowInfoModel
-import com.cvaccari.features.search.data.model.ShowWrapper
 import com.cvaccari.features.search.domain.SearchUseCase
 import kotlinx.coroutines.launch
 
@@ -34,7 +32,7 @@ class SearchViewModel(
     }
 
     val onQueryTextListener = DebouncingQueryTextListener(viewModelScope.coroutineContext,
-        onDebouncingQueryTextChange = {it?.let { onQueryChanged(query = it) }},
-        onClearTextClicked = {_showsItems.postValue(listOf())}
+        onDebouncingQueryTextChange = { it?.let { onQueryChanged(query = it) } },
+        onClearTextClicked = { _showsItems.postValue(listOf()) }
     )
 }

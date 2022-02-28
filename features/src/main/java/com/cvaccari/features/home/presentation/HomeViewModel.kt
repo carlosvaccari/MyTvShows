@@ -6,6 +6,7 @@ import androidx.lifecycle.viewModelScope
 import com.cvaccari.commons.base.BaseViewModel
 import com.cvaccari.core_network.networkresponse.onFailure
 import com.cvaccari.core_network.networkresponse.onSuccess
+import com.cvaccari.core_views.recyclerview.PagingRecyclerView
 import com.cvaccari.features.home.domain.HomeUseCase
 import com.cvaccari.features.search.data.model.ShowInfoModel
 import kotlinx.coroutines.launch
@@ -18,8 +19,18 @@ class HomeViewModel(
     val showsItems: LiveData<List<ShowInfoModel>>
         get() = _showsItems
 
+    val listPagingListener = object : PagingRecyclerView.LoadMoreListener {
+        override fun loadMore() {
+            getSeries()
+        }
+    }
+
     override fun onCreate() {
         super.onCreate()
+        getSeries()
+    }
+
+    private fun getSeries() {
         viewModelScope.launch {
             useCase.getSeries()
                 .onSuccess {

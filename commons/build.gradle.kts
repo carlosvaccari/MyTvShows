@@ -16,6 +16,7 @@ android {
 }
 
 dependencies {
+    implementation(project(Dependencies.Module.core_network))
     implementation(Dependencies.Glide.core)
     implementation(Dependencies.Glide.okhttpIntegration)
     kapt(Dependencies.Glide.compiler)

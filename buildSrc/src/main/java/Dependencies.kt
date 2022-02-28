@@ -4,6 +4,7 @@ object Dependencies {
 
     object Module {
         const val core_network = ":core-network"
+        const val core_views = ":core-views"
         const val commons = ":commons"
         const val features = ":features"
     }
