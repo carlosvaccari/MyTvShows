@@ -2,3 +2,4 @@ rootProject.name = "MyTVSeries"
 include ':app'
 include ':core-network'
 include ':features'
+include ':commons'
