@@ -34,6 +34,7 @@ object Dependencies {
     }
 
     object AndroidX {
+        const val v7 = "androidx.appcompat:appcompat:${Versions.AndroidX.support}"
         const val design = "com.google.android.material:material:${Versions.AndroidX.material}"
         const val databinding =
             "androidx.databinding:databinding-compiler:${Versions.AndroidX.databinding}"

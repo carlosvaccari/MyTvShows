@@ -18,5 +18,6 @@ object Config {
 
     object BuildField {
         const val base_url = "\"https://api.tvmaze.com//\""
+        const val image_url = "\"https://api.tvmaze.com//\""
     }
 }

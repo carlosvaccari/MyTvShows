@@ -28,6 +28,7 @@ object Versions {
         const val databinding = "4.2.2"
         const val lifeCycle = "2.3.1"
         const val core = "1.2.0"
+        const val support = "1.4.1"
     }
 
     object ViewModel {
