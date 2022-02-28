@@ -1,4 +1,4 @@
-package com.cvaccari.features.ui.notifications
+package com.cvaccari.features.notifications
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,7 +8,8 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import com.cvaccari.mytvseries.databinding.FragmentNotificationsBinding
+import com.cvaccari.features.databinding.FragmentNotificationsBinding
+import com.cvaccari.features.ui.notifications.NotificationsViewModel
 
 class NotificationsFragment : Fragment() {
 
