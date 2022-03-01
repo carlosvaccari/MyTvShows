@@ -2,6 +2,8 @@
 <resources>
 
     <!-- region Screen Sizes -->
+    <dimen name="size_xxxsmall">1dp</dimen>
+    <dimen name="size_xxsmall">2dp</dimen>
     <dimen name="size_xsmall">4dp</dimen>
     <dimen name="size_small">8dp</dimen>
     <dimen name="size_medium">16dp</dimen>
@@ -14,6 +16,7 @@
     <dimen name="size_12">12sp</dimen>
     <dimen name="size_14">14sp</dimen>
     <dimen name="size_16">16sp</dimen>
+    <dimen name="size_24">24sp</dimen>
     <dimen name="size_32">32sp</dimen>
     <dimen name="size_48">48sp</dimen>
     <!-- endregion Font Sizes -->

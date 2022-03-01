@@ -2,6 +2,8 @@ package com.cvaccari.features.home.presentation
 
 import android.os.Bundle
 import android.view.View
+import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import com.cvaccari.commons.base.BaseFragment
 import com.cvaccari.commons.delegate.dataBinding
 import com.cvaccari.features.R
@@ -19,5 +21,20 @@ class HomeFragment : BaseFragment(R.layout.home_fragment) {
         super.onViewCreated(view, savedInstanceState)
         binding.viewModel = viewModel
         lifecycle.addObserver(viewModel)
+        initObservers()
+    }
+
+    private fun initObservers() {
+        viewModel.states.observe(viewLifecycleOwner, Observer {
+            when (it) {
+                is HomeStates.ShowDetails -> showDetails(it.id)
+            }
+        })
+    }
+
+    private fun showDetails(id: String) {
+        findNavController().navigate(HomeFragmentDirections.actionNavigationHomeToNavigationShowDetails(
+            id
+        ))
     }
 }

@@ -2,9 +2,9 @@ package com.cvaccari.commons.databindings
 
 import android.widget.ImageView
 import androidx.databinding.BindingAdapter
-import com.cvaccari.commons.extensions.loadImageById
+import com.cvaccari.commons.extensions.loadImageByUrl
 
-@BindingAdapter("srcFromImageId")
-fun ImageView.srcFromImageId(imageId: String?) {
-    imageId?.let { loadImageById(it) }
+@BindingAdapter("srcFromUrl")
+fun ImageView.srcFromUrl(imageUrl: String?) {
+    imageUrl?.let { loadImageByUrl(it) }
 }

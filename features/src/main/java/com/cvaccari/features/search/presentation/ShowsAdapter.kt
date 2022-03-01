@@ -5,6 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.cvaccari.commons.listeners.OnShowClickedListener
 import com.cvaccari.features.databinding.ShowInfoItemBinding
 import com.cvaccari.features.search.data.model.ShowInfoModel
 import kotlinx.coroutines.CoroutineScope
@@ -12,15 +13,19 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-class ShowsAdapter :
+class ShowsAdapter(val onItemClicked: OnShowClickedListener?) :
     ListAdapter<ShowInfoModel, ShowsAdapter.ShowInfoViewHolder>(ShowsItemDiffCallback()) {
 
     private val adapterScope = CoroutineScope(Dispatchers.Default)
 
     fun addAddItemAndSubmitList(list: List<ShowInfoModel>) {
-        adapterScope.launch {
-            withContext(Dispatchers.Main) {
-                submitList(currentList + list)
+        if (list.isEmpty()) {
+            submitList(list)
+        } else {
+            adapterScope.launch {
+                withContext(Dispatchers.Main) {
+                    submitList(currentList + list)
+                }
             }
         }
     }
@@ -30,13 +35,14 @@ class ShowsAdapter :
     }
 
     override fun onBindViewHolder(holder: ShowInfoViewHolder, position: Int) {
-        holder.bind(getItem(position))
+        holder.bind(getItem(position), onItemClicked)
     }
 
     class ShowInfoViewHolder private constructor(private val binding: ShowInfoItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(showWrapper: ShowInfoModel) {
+        fun bind(showWrapper: ShowInfoModel, onItemClicked: OnShowClickedListener?) {
             binding.showInfo = showWrapper
+            binding.onClickListener = onItemClicked
             binding.executePendingBindings()
         }
 

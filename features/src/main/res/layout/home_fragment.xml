@@ -13,17 +13,20 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#E5E5E5"
+        android:background="@android:color/black"
         tools:context="com.cvaccari.features.home.presentation.HomeFragment">
 
         <com.cvaccari.core_views.recyclerview.PagingRecyclerView
             android:layout_width="match_parent"
             android:layout_height="0dp"
             entries="@{viewModel.showsItems}"
+            android:layout_marginTop="@dimen/size_xxsmall"
+            onItemClicked="@{viewModel.onItemClicked}"
             bindListener="@{viewModel.listPagingListener}"
             app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-            app:spanCount="2"
-            android:layout_marginTop="@dimen/size_medium"
+            app:spanCount="3"
+            android:layout_marginStart="@dimen/size_xsmall"
+            android:layout_marginEnd="@dimen/size_xsmall"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 

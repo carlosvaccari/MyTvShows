@@ -1,6 +1,7 @@
 package com.cvaccari.commons.base
 
 import android.os.Bundle
+import androidx.activity.OnBackPressedCallback
 import androidx.annotation.LayoutRes
 import androidx.fragment.app.Fragment
 import org.koin.core.context.loadKoinModules

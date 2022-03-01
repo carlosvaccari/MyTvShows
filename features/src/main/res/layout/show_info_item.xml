@@ -7,27 +7,45 @@
         <variable
             name="showInfo"
             type="com.cvaccari.features.search.data.model.ShowInfoModel" />
+
+        <variable
+            name="onClickListener"
+            type="com.cvaccari.commons.listeners.OnShowClickedListener" />
     </data>
 
-    <com.google.android.material.card.MaterialCardView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/size_small"
-        android:background="@drawable/bg_white_rounded"
-        app:cardCornerRadius="15dp">
+<!--    <com.google.android.material.card.MaterialCardView-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:onClickListener="@{() -> onClickListener.onClicked(showInfo.id)}"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginStart="@dimen/size_xsmall"-->
+<!--        android:layout_marginEnd="@dimen/size_xsmall"-->
+<!--        android:layout_marginBottom="@dimen/size_xsmall"-->
+<!--        android:backgroundTint="@android:color/white"-->
+<!--        app:cardCornerRadius="5dp">-->
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="120dp"
-            android:layout_height="120dp">
+            android:layout_width="match_parent"
+            android:layout_marginStart="@dimen/size_xxxsmall"
+            android:layout_marginEnd="@dimen/size_xxxsmall"
+            android:layout_marginBottom="@dimen/size_xxxsmall"
+            android:onClickListener="@{() -> onClickListener.onClicked(showInfo.id)}"
+            android:layout_height="190dp">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="fitXY"
+                srcFromUrl="@{showInfo.image.original}"/>
 
             <TextView
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 android:layout_width="wrap_content"
+                android:visibility="gone"
                 android:text="@{showInfo.name}"
                 android:layout_height="wrap_content" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
-    </com.google.android.material.card.MaterialCardView>
+<!--    </com.google.android.material.card.MaterialCardView>-->
 
 </layout>

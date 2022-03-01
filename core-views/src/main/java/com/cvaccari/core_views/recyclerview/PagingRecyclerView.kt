@@ -26,11 +26,6 @@ class PagingRecyclerView @JvmOverloads constructor(
         addOnLayoutChangeListener { _, _, _, _, _, _, _, _, _ ->
             isLoading = false
         }
-        setDecorator()
-    }
-
-    private fun setDecorator() {
-        this.addItemDecoration(DividerItemDecoration(context, DividerItemDecoration.HORIZONTAL))
     }
 
     fun startAnim() {
