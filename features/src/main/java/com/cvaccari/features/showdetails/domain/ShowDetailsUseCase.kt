@@ -2,6 +2,7 @@ package com.cvaccari.features.showdetails.domain
 
 import com.cvaccari.core_network.networkresponse.ResultWrapper
 import com.cvaccari.core_views.stickyrecyclerview.Section
+import com.cvaccari.features.search.data.model.ShowImagesModel
 import com.cvaccari.features.showdetails.data.ShowDetailsRepository
 import com.cvaccari.features.showdetails.data.model.ShowDetailsModel
 import com.cvaccari.features.showdetails.presentation.model.ShowDetailsPresentationModel
@@ -41,20 +42,19 @@ class ShowDetailsUseCaseImpl(
                 )
             )
 
-            seasonLists.addAll(
-                episodes.map {
-                    ShowSeasonItemSectionModel(
-                        it,
-                        firstEpisode.season
-                    )
-                }
+            seasonLists.add(
+                ShowSeasonItemSectionModel(
+                    episodes,
+                    firstEpisode.season
+                )
             )
         }
         return ResultWrapper.Success(
             ShowDetailsPresentationModel(
                 seasonsList = seasonLists,
                 name = seasons[1]!![0].name,
-                summary = seasons[1]!![0].summary
+                summary = seasons[1]!![0].summary,
+                images = seasons[1]!![0].image
             )
         )
     }

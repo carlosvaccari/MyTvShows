@@ -4,7 +4,7 @@ import com.cvaccari.core_views.stickyrecyclerview.Section
 import com.cvaccari.features.showdetails.data.model.ShowDetailsModel
 
 data class ShowSeasonItemSectionModel(
-    val item: ShowDetailsModel,
+    val item: List<ShowDetailsModel>,
     val section: Int
 ): Section {
 

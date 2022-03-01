@@ -8,6 +8,7 @@ import com.cvaccari.core_network.networkresponse.onFailure
 import com.cvaccari.core_network.networkresponse.onSuccess
 import com.cvaccari.core_views.stickyrecyclerview.Section
 import com.cvaccari.features.showdetails.domain.ShowDetailsUseCase
+import com.cvaccari.features.showdetails.presentation.model.ShowDetailsPresentationModel
 import kotlinx.coroutines.launch
 
 class ShowDetailsViewModel(
@@ -17,14 +18,19 @@ class ShowDetailsViewModel(
 
     private var _seasonsList = MutableLiveData<List<Section>>()
     val seasonsList: LiveData<List<Section>>
-            get() = _seasonsList
+        get() = _seasonsList
+
+    private var _showDetails = MutableLiveData<ShowDetailsPresentationModel>()
+    val showDetails: LiveData<ShowDetailsPresentationModel>
+        get() = _showDetails
 
     override fun onCreate() {
         super.onCreate()
         viewModelScope.launch {
             useCase.getShowDetails(showId)
                 .onSuccess {
-                    _seasonsList.postValue(it.seasonsList)
+                    _seasonsList.value = it.seasonsList
+                    _showDetails.value = it
                 }
                 .onFailure {
                     it.printStackTrace()

@@ -7,6 +7,7 @@ import com.cvaccari.core_views.stickyrecyclerview.RecyclerViewStickyHeader
 import com.cvaccari.core_views.stickyrecyclerview.Section
 import com.cvaccari.features.search.data.model.ShowInfoModel
 import com.cvaccari.features.search.presentation.ShowsAdapter
+import com.cvaccari.features.showdetails.data.model.ShowDetailsModel
 import com.cvaccari.features.showdetails.presentation.SeasonsEpisodesAdapter
 
 @BindingAdapter(value = ["entries", "onItemClicked"])
@@ -47,4 +48,25 @@ private fun RecyclerView.provideSeasonEpisodesAdapter(
     }
 
     return adapter as SeasonsEpisodesAdapter
+}
+
+@BindingAdapter(value = ["episodesEntries", "onItemClicked"], requireAll = false)
+fun RecyclerView.provideEpisodesAdapter(
+    entries: List<ShowDetailsModel>? = null,
+    onItemClicked: OnShowClickedListener? = null,
+) {
+    entries?.let {
+        val x= entries.map {
+            ShowInfoModel(
+                image = it.image,
+                name = it.name,
+                id = it.id.toString(),
+                type = "",
+                genres = listOf(),
+                summary = ""
+
+            )
+        }
+        provideShowAdapter(onItemClicked).addAddItemAndSubmitList(x)
+    }
 }
