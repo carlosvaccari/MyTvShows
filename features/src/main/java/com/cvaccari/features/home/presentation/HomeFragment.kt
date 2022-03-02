@@ -9,6 +9,7 @@ import com.cvaccari.commons.delegate.dataBinding
 import com.cvaccari.features.R
 import com.cvaccari.features.databinding.HomeFragmentBinding
 import com.cvaccari.features.home.di.HomeModule
+import com.cvaccari.features.search.data.model.ShowInfoModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class HomeFragment : BaseFragment(R.layout.home_fragment) {
@@ -27,12 +28,12 @@ class HomeFragment : BaseFragment(R.layout.home_fragment) {
     private fun initObservers() {
         viewModel.states.observe(viewLifecycleOwner, Observer {
             when (it) {
-                is HomeStates.ShowDetails -> showDetails(it.id)
+                is HomeStates.ShowDetails -> showDetails(it.item)
             }
         })
     }
 
-    private fun showDetails(id: String) {
+    private fun showDetails(id: ShowInfoModel) {
         findNavController().navigate(HomeFragmentDirections.actionNavigationHomeToNavigationShowDetails(
             id
         ))

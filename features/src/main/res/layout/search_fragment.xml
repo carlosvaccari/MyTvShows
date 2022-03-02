@@ -24,29 +24,38 @@
             android:layout_margin="@dimen/size_medium"
             android:background="@drawable/bg_white_rounded"
             app:layout_constraintTop_toTopOf="parent"
-            app:queryHint="Search by serie name"
+            app:iconifiedByDefault="false"
             app:queryBackground="@android:color/transparent"
+            app:queryHint="Search by serie name"
             app:submitBackground="@drawable/bg_white_rounded" />
 
         <androidx.recyclerview.widget.RecyclerView
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
             entries="@{viewModel.showsItems}"
             onItemClicked="@{viewModel.onItemClicked}"
-            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-            app:spanCount="3"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
             android:layout_marginTop="@dimen/size_medium"
+            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/searchview"
+            app:spanCount="3" />
+
+        <include
+            android:id="@+id/container_loading"
+            layout="@layout/loading_container"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toBottomOf="@id/searchview" />
 
         <include
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:id="@+id/container_loading"
             layout="@layout/loading_container"
-            android:visibility="gone"
+            android:layout_height="0dp"
+            app:layout_constraintTop_toBottomOf="@id/searchview"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/searchview" />
+            visibilityCondition="@{viewModel.isLoading}"
+            android:layout_width="match_parent"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

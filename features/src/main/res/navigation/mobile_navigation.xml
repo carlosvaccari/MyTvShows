@@ -27,7 +27,7 @@
 
     <fragment
         android:id="@+id/navigation_notifications"
-        android:name="com.cvaccari.features.notifications.NotificationsFragment"
+        android:name="com.cvaccari.features.favorities.presentation.FavoritiesFragment"
         android:label="@string/title_notifications"
         tools:layout="@layout/favorities_fragment" >
         <action
@@ -41,8 +41,8 @@
         android:label="@string/title_show_details"
         tools:layout="@layout/show_details_fragment">
         <argument
-            android:name="showId"
-            app:argType="string"
+            android:name="showInfoModel"
+            app:argType="com.cvaccari.features.search.data.model.ShowInfoModel"
             app:nullable="false" />
     </fragment>
 

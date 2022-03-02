@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="Widget.App.BottomNavigationView" parent="Widget.MaterialComponents.BottomNavigationView.Colored">
-        <item name="materialThemeOverlay">@style/ThemeOverlay.App.BottomNavigationView</item>
+    <style name="SearchBottomMenu">
+        <item name="itemIconTint">@color/black</item>
+        <item name="background">@color/black</item>
+<!--        <item name="itemTextColor">@drawable/nav_item_color_state_dark</item>-->
+<!--        <item name="android:paddingTop">@dimen/padding_nano</item>-->
     </style>
 
-    <style name="ThemeOverlay.App.BottomNavigationView" parent="">
-        <item name="colorPrimary">#000000</item>
-        <item name="colorOnPrimary">#000000</item>
-    </style>
 </resources>

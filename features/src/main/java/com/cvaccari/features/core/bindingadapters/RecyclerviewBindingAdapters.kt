@@ -2,7 +2,7 @@ package com.cvaccari.features.core.bindingadapters
 
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.cvaccari.commons.listeners.OnShowClickedListener
+import com.cvaccari.features.core.listeners.OnShowClickedListener
 import com.cvaccari.core_views.stickyrecyclerview.RecyclerViewStickyHeader
 import com.cvaccari.core_views.stickyrecyclerview.Section
 import com.cvaccari.features.search.data.model.ShowInfoModel
@@ -40,11 +40,11 @@ fun RecyclerViewStickyHeader.provideSeasosAdapter(
 
 }
 
-private fun RecyclerView.provideSeasonEpisodesAdapter(
+private fun RecyclerViewStickyHeader.provideSeasonEpisodesAdapter(
     onItemClicked: OnShowClickedListener? = null
 ): SeasonsEpisodesAdapter {
     if (adapter == null) {
-        adapter = SeasonsEpisodesAdapter()
+        setStickAdapter(SeasonsEpisodesAdapter())
     }
 
     return adapter as SeasonsEpisodesAdapter

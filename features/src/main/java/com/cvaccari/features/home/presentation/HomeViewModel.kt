@@ -2,19 +2,23 @@ package com.cvaccari.features.home.presentation
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Transformations
 import androidx.lifecycle.viewModelScope
 import com.cvaccari.commons.base.BaseViewModel
-import com.cvaccari.commons.listeners.OnShowClickedListener
+import com.cvaccari.commons.base.State
 import com.cvaccari.commons.utils.SingleLiveEvent
 import com.cvaccari.core_network.networkresponse.onFailure
 import com.cvaccari.core_network.networkresponse.onSuccess
 import com.cvaccari.core_views.recyclerview.PagingRecyclerView
+import com.cvaccari.features.core.listeners.OnShowClickedListener
 import com.cvaccari.features.home.domain.HomeUseCase
 import com.cvaccari.features.search.data.model.ShowInfoModel
 import kotlinx.coroutines.launch
 
-sealed class HomeStates {
-    data class ShowDetails(val id: String) : HomeStates()
+sealed class HomeStates : State {
+    data class ShowDetails(val item: ShowInfoModel) : HomeStates()
+    object Loading : HomeStates()
+    object Success : HomeStates()
 }
 
 class HomeViewModel(
@@ -36,8 +40,8 @@ class HomeViewModel(
     }
 
     val onItemClicked = object : OnShowClickedListener {
-        override fun onClicked(id: String) {
-            _states.postValue(HomeStates.ShowDetails(id))
+        override fun onClicked(item: ShowInfoModel) {
+            _states.postValue(HomeStates.ShowDetails(item))
         }
     }
 
@@ -47,9 +51,11 @@ class HomeViewModel(
     }
 
     private fun getSeries() {
+        _states.postValue(HomeStates.Loading)
         viewModelScope.launch {
             useCase.getSeries()
                 .onSuccess {
+                    _states.postValue(HomeStates.Success)
                     _showsItems.postValue(it)
                 }
                 .onFailure {
@@ -57,4 +63,7 @@ class HomeViewModel(
                 }
         }
     }
+
+    fun isLoading() = Transformations.map(_states) { it is HomeStates.Loading }
+
 }

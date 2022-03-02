@@ -14,5 +14,8 @@ inline fun <reified TYPE : State> LiveData<out State>.atState(
         }
     }
 
+    val x = MutableLiveData((this is TYPE))
+    println(">>>>>> " + x.value)
+
     return MutableLiveData((this as? TYPE) != null)
 }

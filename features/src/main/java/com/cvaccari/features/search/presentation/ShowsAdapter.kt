@@ -5,7 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.cvaccari.commons.listeners.OnShowClickedListener
+import com.cvaccari.features.core.listeners.OnShowClickedListener
 import com.cvaccari.features.databinding.ShowInfoItemBinding
 import com.cvaccari.features.search.data.model.ShowInfoModel
 import kotlinx.coroutines.CoroutineScope

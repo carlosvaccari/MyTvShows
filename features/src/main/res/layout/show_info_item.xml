@@ -10,26 +10,16 @@
 
         <variable
             name="onClickListener"
-            type="com.cvaccari.commons.listeners.OnShowClickedListener" />
+            type="com.cvaccari.features.core.listeners.OnShowClickedListener" />
     </data>
 
-<!--    <com.google.android.material.card.MaterialCardView-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:onClickListener="@{() -> onClickListener.onClicked(showInfo.id)}"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_marginStart="@dimen/size_xsmall"-->
-<!--        android:layout_marginEnd="@dimen/size_xsmall"-->
-<!--        android:layout_marginBottom="@dimen/size_xsmall"-->
-<!--        android:backgroundTint="@android:color/white"-->
-<!--        app:cardCornerRadius="5dp">-->
-
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="200dp"
+            android:layout_width="match_parent"
             android:layout_marginStart="@dimen/size_xxxsmall"
             android:background="@android:color/white"
             android:layout_marginEnd="@dimen/size_xxxsmall"
             android:layout_marginBottom="@dimen/size_xxxsmall"
-            android:onClickListener="@{() -> onClickListener.onClicked(showInfo.id)}"
+            android:onClickListener="@{() -> onClickListener.onClicked(showInfo)}"
             android:layout_height="190dp">
 
             <ImageView

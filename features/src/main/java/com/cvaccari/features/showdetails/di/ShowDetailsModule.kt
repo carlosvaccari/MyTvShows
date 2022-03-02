@@ -3,6 +3,7 @@ package com.cvaccari.features.showdetails.di
 import com.cvaccari.features.search.data.SearchApi
 import com.cvaccari.features.search.data.SearchRepository
 import com.cvaccari.features.search.data.SearchRepositoryImpl
+import com.cvaccari.features.search.data.model.ShowInfoModel
 import com.cvaccari.features.search.domain.SearchUseCase
 import com.cvaccari.features.search.domain.SearchUseCaseImpl
 import com.cvaccari.features.search.presentation.SearchViewModel
@@ -19,9 +20,9 @@ import retrofit2.Retrofit
 object ShowDetailsModule  {
 
     val instance = module {
-        viewModel { (showId: String) ->
+        viewModel { (show: ShowInfoModel) ->
             ShowDetailsViewModel(
-                showId = showId,
+                show = show,
                 useCase = get()
             )
         }

@@ -5,21 +5,68 @@
     <data>
 
         <variable
-            name="episodesInfo"
-            type="com.cvaccari.features.showdetails.presentation.model.ShowSeasonItemSectionModel" />
+            name="item"
+            type="com.cvaccari.features.showdetails.data.model.ShowDetailsModel" />
 
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
+        android:background="@color/black"
         android:layout_height="190dp">
 
-        <androidx.recyclerview.widget.RecyclerView
+        <ImageView
+            android:id="@+id/imageview_image"
+            android:layout_width="130dp"
+            android:layout_height="80dp"
+            android:scaleType="centerCrop"
+            srcFromUrl="@{item.image.original}"
+            android:layout_margin="@dimen/size_medium"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textview_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{@string/episode_name(item.number, item.name)}"
+            android:textColor="@color/white"
+            android:layout_marginStart="@dimen/size_medium"
+            android:textSize="@dimen/size_14"
+            app:layout_constraintBottom_toTopOf="@id/textview_duration"
+            app:layout_constraintStart_toEndOf="@id/imageview_image"
+            app:layout_constraintTop_toTopOf="@id/imageview_image"
+            app:layout_constraintVertical_chainStyle="packed" />
+
+        <TextView
+            android:id="@+id/textview_duration"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:textSize="@dimen/size_14"
+            android:layout_marginStart="@dimen/size_medium"
+            app:layout_constraintBottom_toBottomOf="@id/imageview_image"
+            app:layout_constraintStart_toEndOf="@id/imageview_image"
+            app:layout_constraintTop_toBottomOf="@id/textview_name"
+            app:layout_constraintVertical_chainStyle="packed" />
+
+        <TextView
+            android:id="@+id/textview_summary"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            episodesEntries="@{episodesInfo.item}"
-            android:orientation="horizontal"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:textSize="@dimen/size_12"
+            android:text="@{item.summary}"
+            android:layout_margin="@dimen/size_medium"
+            android:layout_marginStart="@dimen/size_medium"
+            app:layout_constraintTop_toBottomOf="@id/imageview_image" />
+
+        <!--        <androidx.recyclerview.widget.RecyclerView-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:layout_height="match_parent"-->
+        <!--            episodesEntries="@{episodesInfo.item}"-->
+        <!--            android:orientation="horizontal"-->
+        <!--            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>-->
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

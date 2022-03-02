@@ -8,6 +8,7 @@ import com.cvaccari.core_views.stickyrecyclerview.StickyAdapter
 import com.cvaccari.features.R
 import com.cvaccari.features.databinding.SeasonsEpisodesHeaderBinding
 import com.cvaccari.features.databinding.SeasonsEpisodesItemBinding
+import com.cvaccari.features.showdetails.data.model.ShowDetailsModel
 import com.cvaccari.features.showdetails.presentation.model.ShowSeasonHeaderSectionModel
 import com.cvaccari.features.showdetails.presentation.model.ShowSeasonItemSectionModel
 
@@ -22,7 +23,7 @@ class SeasonsEpisodesAdapter: StickyAdapter<RecyclerView.ViewHolder, RecyclerVie
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         if (list[position].type() == Section.ITEM) {
-            (holder as ViewHolderItem).bind((list[position] as ShowSeasonItemSectionModel))
+            (holder as ViewHolderItem).bind((list[position] as ShowSeasonItemSectionModel).item)
         } else {
             (holder as ViewHolderHeader).bind(list[position] as ShowSeasonHeaderSectionModel)
         }
@@ -91,9 +92,9 @@ class SeasonsEpisodesAdapter: StickyAdapter<RecyclerView.ViewHolder, RecyclerVie
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(
-            episodesInfo: ShowSeasonItemSectionModel
+            item: ShowDetailsModel
         ) {
-            binding.episodesInfo = episodesInfo
+            binding.item = item
             binding.executePendingBindings()
         }
     }
