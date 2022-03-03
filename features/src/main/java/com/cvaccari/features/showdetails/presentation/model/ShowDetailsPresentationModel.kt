@@ -8,7 +8,7 @@ data class ShowDetailsPresentationModel(
     val seasonsList: List<Section>,
     val name: String,
     val summary: Spanned,
-    val images: ShowImagesModel,
+    val images: ShowImagesModel? = null,
     val seasonsCount: Int,
     var isFavorite: Boolean = false
 )

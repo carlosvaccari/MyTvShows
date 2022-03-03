@@ -8,7 +8,7 @@ data class ShowInfoModel(
     val name: String,
     val type: String,
     val genres: List<String>,
-    val image: ShowImagesModel,
+    val image: ShowImagesModel? = null,
     val summary: String,
     var isFavorite: Boolean = false
 ): Serializable
@@ -19,7 +19,7 @@ fun FavoritesEntity.toShowInfoModel(): ShowInfoModel {
         name = this.name,
         type = this.type,
         genres = this.genres,
-        image = ShowImagesModel(this.imageMedium, this.imageOriginal),
+        image = ShowImagesModel(this.imageMedium.orEmpty(), this.imageOriginal.orEmpty()),
         summary = this.summary,
         isFavorite = true
     )
@@ -31,8 +31,8 @@ fun ShowInfoModel.toFavoritiesEntity() : FavoritesEntity {
         name = this.name,
         type = this.type,
         genres = this.genres,
-        imageMedium = image.medium,
-        imageOriginal = image.original,
+        imageMedium = image?.medium,
+        imageOriginal = image?.original,
         summary = this.summary
     )
 }

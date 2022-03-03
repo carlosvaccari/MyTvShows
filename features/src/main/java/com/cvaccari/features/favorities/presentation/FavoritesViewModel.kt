@@ -42,16 +42,19 @@ class FavoritesViewModel(
         super.onCreate()
         _states.postValue(FavoritesStates.Loading)
         useCase.getFavorites()
-            .onEmpty {
-                _states.postValue(FavoritesStates.Empty)
-            }
             .onEach {
-                _states.postValue(FavoritesStates.Success)
+                if(it.isEmpty()) {
+                    _states.postValue(FavoritesStates.Empty)
+                } else {
+                    _states.postValue(FavoritesStates.Success)
+                }
                 _showsItems.value = listOf()
                 _showsItems.postValue(it)
             }.launchIn(viewModelScope)
     }
 
     fun isLoading() = Transformations.map(_states) { it is FavoritesStates.Loading }
+
+    fun isEmpty() = Transformations.map(_states) { it is FavoritesStates.Empty }
 
 }

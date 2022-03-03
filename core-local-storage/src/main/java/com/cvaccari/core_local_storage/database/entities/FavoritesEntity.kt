@@ -10,7 +10,7 @@ data class FavoritesEntity(
     @ColumnInfo(name = "name") val name: String,
     @ColumnInfo(name = "type") val type: String,
     @ColumnInfo(name = "genres") val genres: List<String>,
-    @ColumnInfo(name = "imageMedium") val imageMedium: String,
-    @ColumnInfo(name = "imageOriginal") val imageOriginal: String,
+    @ColumnInfo(name = "imageMedium") val imageMedium: String? = null,
+    @ColumnInfo(name = "imageOriginal") val imageOriginal: String? = null,
     @ColumnInfo(name = "summary") val summary: String
 )

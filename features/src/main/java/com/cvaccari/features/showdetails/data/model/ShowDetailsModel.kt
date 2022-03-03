@@ -12,5 +12,5 @@ data class ShowDetailsModel(
     val airtime: String,
     val summary: String,
     val runtime: Int,
-    val image: ShowImagesModel
+    val image: ShowImagesModel? = null
 )
