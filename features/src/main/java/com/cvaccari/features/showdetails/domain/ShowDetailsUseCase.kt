@@ -48,7 +48,10 @@ class ShowDetailsUseCaseImpl(
             seasonLists.addAll(
                 episodes.map {
                     ShowSeasonItemSectionModel(
-                        it,
+                        it.copy(summary = HtmlCompat.fromHtml(
+                            it.summary,
+                            HtmlCompat.FROM_HTML_MODE_LEGACY
+                        ).toString()),
                         season
                     )
                 }
@@ -63,7 +66,7 @@ class ShowDetailsUseCaseImpl(
                     HtmlCompat.FROM_HTML_MODE_LEGACY
                 ),
                 images = seasons[1]!![0].image,
-                seasonsCount = seasonLists.filter { it.type() == Section.HEADER }.count()
+                seasonsCount = seasonLists.filter { it.type() == Section.HEADER }.count(),
             )
         )
     }

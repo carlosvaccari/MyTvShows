@@ -1,7 +1,9 @@
 package com.cvaccari.features.core.bindingadapters
 
 import androidx.databinding.BindingAdapter
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.cvaccari.core_views.decorators.DividerItemDecoration
 import com.cvaccari.features.core.listeners.OnShowClickedListener
 import com.cvaccari.core_views.stickyrecyclerview.RecyclerViewStickyHeader
 import com.cvaccari.core_views.stickyrecyclerview.Section
@@ -48,6 +50,12 @@ private fun RecyclerViewStickyHeader.provideSeasonEpisodesAdapter(
     if (adapter == null) {
         setStickAdapter(SeasonsEpisodesAdapter(onItemClicked))
     }
+
+    addItemDecoration(
+        DividerItemDecoration(
+            context
+        )
+    )
 
     return adapter as SeasonsEpisodesAdapter
 }

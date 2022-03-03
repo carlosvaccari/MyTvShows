@@ -8,12 +8,14 @@
         <entry key="app/src/main/res/drawable/ic_home_black_24dp.xml" value="0.2171875" />
         <entry key="app/src/main/res/drawable/ic_notifications_black_24dp.xml" value="0.2171875" />
         <entry key="app/src/main/res/menu/bottom_nav_menu.xml" value="0.21041666666666667" />
+        <entry key="core-views/src/main/res/drawable/line_divider.xml" value="0.23229166666666667" />
         <entry key="features/src/main/res/drawable/baseline_search_20.xml" value="0.21822916666666667" />
         <entry key="features/src/main/res/drawable/bg_placeholder_img.xml" value="0.20677083333333332" />
         <entry key="features/src/main/res/drawable/bg_white_gradient.xml" value="0.20677083333333332" />
         <entry key="features/src/main/res/drawable/bg_white_rounded.xml" value="0.2265625" />
         <entry key="features/src/main/res/drawable/bottom_navigation_selector.xml" value="0.2171875" />
         <entry key="features/src/main/res/drawable/favorite_button_state.xml" value="0.22708333333333333" />
+        <entry key="features/src/main/res/drawable/ic_back.xml" value="0.23229166666666667" />
         <entry key="features/src/main/res/drawable/ic_placeholder.xml" value="0.20677083333333332" />
         <entry key="features/src/main/res/drawable/ic_series.xml" value="0.21822916666666667" />
         <entry key="features/src/main/res/drawable/icon_favorite_border.xml" value="0.22708333333333333" />

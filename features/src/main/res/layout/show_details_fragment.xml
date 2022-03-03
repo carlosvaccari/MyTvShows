@@ -4,86 +4,129 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="viewModel"
             type="com.cvaccari.features.showdetails.presentation.ShowDetailsViewModel" />
+
         <variable
             name="onClickListener"
             type="com.cvaccari.features.core.listeners.OnFavoriteClickedListener" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@color/black">
 
-        <ImageView
-            android:id="@+id/imageview_banner"
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/appBarLayout"
             android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:scaleType="fitXY"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:src="@drawable/ic_placeholder"
-            srcFromUrl="@{viewModel.showDetails.images.original}"/>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:visibility="gone"
-            app:layout_constraintTop_toTopOf="@id/imageview_banner"
-            app:layout_constraintBottom_toBottomOf="@id/imageview_banner"
-            android:background="@drawable/bg_white_gradient"/>
-
-        <TextView
-            android:id="@+id/textview_title"
-            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/size_medium"
-            app:layout_constraintTop_toBottomOf="@id/imageview_banner"
-            tools:text="@{viewModel.showName}"
-            android:textColor="@color/white"
-            android:textSize="@dimen/size_20"
-            android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginStart="@dimen/size_large"/>
+            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
-        <TextView
-            android:id="@+id/textview_seasons_count"
-            android:layout_width="wrap_content"
-            android:textColor="@color/white"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/size_small"
-            android:textSize="@dimen/size_12"
-            app:layout_constraintTop_toBottomOf="@id/textview_title"
-            app:layout_constraintStart_toStartOf="@id/textview_title"
-            android:text="@{@string/seasons_count(viewModel.showDetails.seasonsCount)}"/>
+            <com.google.android.material.appbar.CollapsingToolbarLayout
+                android:id="@+id/collapsingToolbarLayout"
+                android:layout_width="match_parent"
+                android:layout_height="180dp"
+                app:collapsedTitleGravity="center_vertical"
+                app:collapsedTitleTextAppearance="@style/AppBarCollapsed"
+                app:contentScrim="@color/black"
+                app:expandedTitleTextAppearance="@style/AppBarExpanded"
+                app:layout_scrollFlags="scroll|exitUntilCollapsed"
+                app:scrimAnimationDuration="200"
+                app:title="@{viewModel.showName}"
+                app:titleEnabled="true"
+                tools:visibility="visible">
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/imageview_banner"
-            app:layout_constraintEnd_toEndOf="parent"
-            onStateChanged="@{viewModel.isFavorite()}"
-            android:onClickListener="@{() -> onClickListener.onAddToFavorite()}"
-            android:layout_marginTop="@dimen/size_medium"
-            android:layout_marginEnd="@dimen/size_small"
-            tools:src="@drawable/icon_favorite_filled"
-            android:background="@drawable/favorite_button_state"/>
+                <androidx.coordinatorlayout.widget.CoordinatorLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_collapseMode="parallax">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <ImageView
+                            android:id="@+id/imageview_banner"
+                            srcFromUrl="@{viewModel.showDetails.images.original}"
+                            android:layout_width="match_parent"
+                            android:layout_height="200dp"
+                            android:scaleType="centerCrop"
+                            app:layout_constraintTop_toTopOf="parent"
+                            tools:src="@drawable/ic_placeholder" />
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/size_medium"
+                            android:background="@color/black"
+                            app:layout_constraintBottom_toBottomOf="parent"/>
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+            </com.google.android.material.appbar.CollapsingToolbarLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                showIf="@{!viewModel.isLoading}"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/textview_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/size_medium"
+                    android:textColor="@color/white"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:textSize="@dimen/size_24"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toTopOf="@id/textview_seasons_count"
+                    android:textStyle="bold"
+                    tools:text="@{viewModel.showName}" />
+
+                <TextView
+                    android:id="@+id/textview_seasons_count"
+                    android:layout_width="wrap_content"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toBottomOf="@id/textview_title"
+                    android:layout_marginStart="@dimen/size_20"
+                    android:text="@{@string/seasons_count(viewModel.showDetails.seasonsCount)}"
+                    android:textColor="@color/white_70"
+                    android:textSize="@dimen/size_12" />
+
+                <ImageView
+                    onStateChanged="@{viewModel.isFavorite()}"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:layout_marginTop="@dimen/size_medium"
+                    android:layout_marginEnd="@dimen/size_medium"
+                    android:background="@drawable/favorite_button_state"
+                    android:onClickListener="@{() -> onClickListener.onAddToFavorite()}"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/textview_title"
+                    app:layout_constraintBottom_toBottomOf="@id/textview_seasons_count"
+                    tools:src="@drawable/icon_favorite_filled" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </com.google.android.material.appbar.AppBarLayout>
 
         <com.cvaccari.core_views.stickyrecyclerview.RecyclerViewStickyHeader
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            app:layout_constraintTop_toBottomOf="@id/textview_seasons_count"
-            seasonsEntries="@{viewModel.seasonsList}"
             onItemClicked="@{viewModel.onEpisodeClicked}"
+            seasonsEntries="@{viewModel.seasonsList}"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/size_medium"
-            app:layout_constraintBottom_toBottomOf="parent"/>
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
+            app:layout_constraintTop_toTopOf="parent" />
 
-        <include
-            layout="@layout/loading_container"
-            android:layout_height="match_parent"
-            visibilityCondition="@{viewModel.isLoading}"
-            android:layout_width="match_parent"/>
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
