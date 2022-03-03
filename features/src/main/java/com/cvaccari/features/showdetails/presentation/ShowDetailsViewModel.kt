@@ -9,9 +9,11 @@ import com.cvaccari.commons.utils.SingleLiveEvent
 import com.cvaccari.core_network.networkresponse.onFailure
 import com.cvaccari.core_network.networkresponse.onSuccess
 import com.cvaccari.core_views.stickyrecyclerview.Section
+import com.cvaccari.features.core.listeners.OnEpisodeClickedListener
 import com.cvaccari.features.core.listeners.OnFavoriteClickedListener
 import com.cvaccari.features.favorities.domain.FavoritesUseCase
 import com.cvaccari.features.search.data.model.ShowInfoModel
+import com.cvaccari.features.showdetails.data.model.ShowDetailsModel
 import com.cvaccari.features.showdetails.domain.ShowDetailsUseCase
 import com.cvaccari.features.showdetails.presentation.model.ShowDetailsPresentationModel
 import kotlinx.coroutines.flow.launchIn
@@ -21,6 +23,7 @@ import kotlinx.coroutines.launch
 sealed class ShowDetailsStates {
     object Loading : ShowDetailsStates()
     object Success : ShowDetailsStates()
+    data class ShowEpisodeDetails(val showId: String, val season: Int, val number: Int) : ShowDetailsStates()
 }
 
 class ShowDetailsViewModel(
@@ -77,6 +80,12 @@ class ShowDetailsViewModel(
             viewModelScope.launch {
                 favoritesUseCase.handleFavorite(show)
             }
+        }
+    }
+
+    val onEpisodeClicked = object : OnEpisodeClickedListener {
+        override fun onClick(item : ShowDetailsModel) {
+            _states.postValue(ShowDetailsStates.ShowEpisodeDetails(show.id, item.season, item.number))
         }
     }
 

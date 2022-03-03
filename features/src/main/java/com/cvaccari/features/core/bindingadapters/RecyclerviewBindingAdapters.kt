@@ -5,6 +5,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.cvaccari.features.core.listeners.OnShowClickedListener
 import com.cvaccari.core_views.stickyrecyclerview.RecyclerViewStickyHeader
 import com.cvaccari.core_views.stickyrecyclerview.Section
+import com.cvaccari.features.core.listeners.OnEpisodeClickedListener
 import com.cvaccari.features.search.data.model.ShowInfoModel
 import com.cvaccari.features.search.presentation.ShowsAdapter
 import com.cvaccari.features.showdetails.data.model.ShowDetailsModel
@@ -30,21 +31,22 @@ private fun RecyclerView.provideShowAdapter(
     return adapter as ShowsAdapter
 }
 
-@BindingAdapter(value = ["seasonsEntries"])
+@BindingAdapter(value = ["seasonsEntries", "onItemClicked"])
 fun RecyclerViewStickyHeader.provideSeasosAdapter(
     entries: List<Section>? = null,
+    onItemClicked: OnEpisodeClickedListener
 ) {
     entries?.let {
-        provideSeasonEpisodesAdapter().list = it
+        provideSeasonEpisodesAdapter(onItemClicked).list = it
     }
 
 }
 
 private fun RecyclerViewStickyHeader.provideSeasonEpisodesAdapter(
-    onItemClicked: OnShowClickedListener? = null
+    onItemClicked: OnEpisodeClickedListener
 ): SeasonsEpisodesAdapter {
     if (adapter == null) {
-        setStickAdapter(SeasonsEpisodesAdapter())
+        setStickAdapter(SeasonsEpisodesAdapter(onItemClicked))
     }
 
     return adapter as SeasonsEpisodesAdapter

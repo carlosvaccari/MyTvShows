@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="../../../../layout/custom_preview.xml" value="0.22604166666666667" />
         <entry key="app/src/main/res/drawable/ic_dashboard_black_24dp.xml" value="0.2171875" />
         <entry key="app/src/main/res/drawable/ic_home_black_24dp.xml" value="0.2171875" />
         <entry key="app/src/main/res/drawable/ic_notifications_black_24dp.xml" value="0.2171875" />
@@ -19,6 +20,8 @@
         <entry key="features/src/main/res/drawable/icon_favorite_filled.xml" value="0.22708333333333333" />
         <entry key="features/src/main/res/drawable/selector_bottom_navigation.xml" value="0.21822916666666667" />
         <entry key="features/src/main/res/layout/activity_main.xml" value="0.21041666666666667" />
+        <entry key="features/src/main/res/layout/episodes_details_fragment.xml" value="0.19166666666666668" />
+        <entry key="features/src/main/res/layout/favorites_fragment.xml" value="0.2109375" />
         <entry key="features/src/main/res/layout/favorities_fragment.xml" value="0.15625" />
         <entry key="features/src/main/res/layout/fragment_dashboard.xml" value="0.21145833333333333" />
         <entry key="features/src/main/res/layout/fragment_notifications.xml" value="0.19479166666666667" />

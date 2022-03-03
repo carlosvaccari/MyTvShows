@@ -75,6 +75,7 @@
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintTop_toBottomOf="@id/textview_seasons_count"
             seasonsEntries="@{viewModel.seasonsList}"
+            onItemClicked="@{viewModel.onEpisodeClicked}"
             android:layout_marginTop="@dimen/size_medium"
             app:layout_constraintBottom_toBottomOf="parent"/>
 

@@ -3,6 +3,9 @@ package com.cvaccari.features
 import android.os.Bundle
 import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.isVisible
+import androidx.navigation.NavController
+import androidx.navigation.NavDestination
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
@@ -27,6 +30,12 @@ class MainActivity : AppCompatActivity() {
     private fun setupNavController() {
         val navController = findNavController(R.id.nav_host_fragment_activity_main)
         binding.navView.setupWithNavController(navController)
+
+        navController.addOnDestinationChangedListener { _, destination, _ ->
+            binding.navView.isVisible = !(destination.id != R.id.navigation_home &&
+                    destination.id != R.id.navigation_dashboard &&
+                    destination.id != R.id.navigation_notifications)
+        }
     }
 
     override fun onDestroy() {

@@ -4,6 +4,8 @@
     <string name="title_search">Search</string>
     <string name="title_watch_list">My List</string>
     <string name="title_show_details">Show details</string>
+    <string name="title_episode_details">Episode details</string>
     <string name="seasons_count">%s Seasons</string>
     <string name="episode_name">%s. %s</string>
+    <string name="episode_season_and_number">%d: %d</string>
 </resources>

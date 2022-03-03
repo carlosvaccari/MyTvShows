@@ -44,6 +44,28 @@
             android:name="showInfoModel"
             app:argType="com.cvaccari.features.search.data.model.ShowInfoModel"
             app:nullable="false" />
+        <action
+            android:id="@+id/action_navigation_show_details_to_navigation_episode_details"
+            app:destination="@id/navigation_episode_details" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_episode_details"
+        android:name="com.cvaccari.features.episodedetails.presentation.EpisodeDetailsFragment"
+        android:label="@string/title_episode_details"
+        tools:layout="@layout/episodes_details_fragment">
+        <argument
+            android:name="showId"
+            app:argType="string"
+            app:nullable="false" />
+        <argument
+            android:name="season"
+            app:argType="string"
+            app:nullable="false" />
+        <argument
+            android:name="number"
+            app:argType="string"
+            app:nullable="false" />
     </fragment>
 
 </navigation>

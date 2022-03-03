@@ -8,10 +8,15 @@
             name="item"
             type="com.cvaccari.features.showdetails.data.model.ShowDetailsModel" />
 
+        <variable
+            name="onClickListener"
+            type="com.cvaccari.features.core.listeners.OnEpisodeClickedListener" />
+
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
+        android:onClickListener="@{() -> onClickListener.onClick(item)}"
         android:background="@color/black"
         android:layout_height="190dp">
 

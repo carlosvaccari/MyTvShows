@@ -6,13 +6,16 @@ import androidx.recyclerview.widget.RecyclerView
 import com.cvaccari.core_views.stickyrecyclerview.Section
 import com.cvaccari.core_views.stickyrecyclerview.StickyAdapter
 import com.cvaccari.features.R
+import com.cvaccari.features.core.listeners.OnEpisodeClickedListener
 import com.cvaccari.features.databinding.SeasonsEpisodesHeaderBinding
 import com.cvaccari.features.databinding.SeasonsEpisodesItemBinding
 import com.cvaccari.features.showdetails.data.model.ShowDetailsModel
 import com.cvaccari.features.showdetails.presentation.model.ShowSeasonHeaderSectionModel
 import com.cvaccari.features.showdetails.presentation.model.ShowSeasonItemSectionModel
 
-class SeasonsEpisodesAdapter: StickyAdapter<RecyclerView.ViewHolder, RecyclerView.ViewHolder>() {
+class SeasonsEpisodesAdapter(
+    val listener: OnEpisodeClickedListener
+): StickyAdapter<RecyclerView.ViewHolder, RecyclerView.ViewHolder>() {
 
     var list = listOf<Section>()
         set(value) {
@@ -23,7 +26,7 @@ class SeasonsEpisodesAdapter: StickyAdapter<RecyclerView.ViewHolder, RecyclerVie
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         if (list[position].type() == Section.ITEM) {
-            (holder as ViewHolderItem).bind((list[position] as ShowSeasonItemSectionModel).item)
+            (holder as ViewHolderItem).bind((list[position] as ShowSeasonItemSectionModel).item, listener)
         } else {
             (holder as ViewHolderHeader).bind(list[position] as ShowSeasonHeaderSectionModel)
         }
@@ -92,9 +95,11 @@ class SeasonsEpisodesAdapter: StickyAdapter<RecyclerView.ViewHolder, RecyclerVie
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(
-            item: ShowDetailsModel
+            item: ShowDetailsModel,
+            listener: OnEpisodeClickedListener
         ) {
             binding.item = item
+            binding.onClickListener = listener
             binding.executePendingBindings()
         }
     }
