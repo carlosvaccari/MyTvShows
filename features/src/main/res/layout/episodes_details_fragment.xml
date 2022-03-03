@@ -31,7 +31,7 @@
             android:layout_marginStart="@dimen/size_medium"
             android:layout_marginTop="@dimen/size_medium"
             android:text="@{@string/episode_season_and_number(viewModel.episodeModel.season, viewModel.episodeModel.number)}"
-            android:textColor="@color/white"
+            android:textColor="@color/white_70"
             android:textSize="@dimen/size_12"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/imageview_banner" />
@@ -44,6 +44,7 @@
             android:text="@{viewModel.episodeModel.name}"
             android:textColor="@color/white"
             android:textSize="@dimen/size_20"
+            android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/textview_episode_number" />
 
@@ -54,7 +55,7 @@
             android:layout_margin="@dimen/size_medium"
             android:text="@{viewModel.episodeModel.summary}"
             android:textColor="@color/white"
-            android:textSize="@dimen/size_16"
+            android:textSize="@dimen/size_14"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/textview_name" />

@@ -2,6 +2,7 @@ package com.cvaccari.features.episodedetails.presentation
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Transformations
 import androidx.lifecycle.viewModelScope
 import com.cvaccari.commons.base.BaseViewModel
 import com.cvaccari.core_network.networkresponse.onFailure
@@ -13,6 +14,7 @@ import kotlinx.coroutines.launch
 sealed class EpisodeDetailsStates {
     object Loading : EpisodeDetailsStates()
     object Success : EpisodeDetailsStates()
+    object Error : EpisodeDetailsStates()
 }
 
 class EpisodeDetailsViewModel(
@@ -32,6 +34,7 @@ class EpisodeDetailsViewModel(
 
     override fun onCreate() {
         super.onCreate()
+        _state.postValue(EpisodeDetailsStates.Loading)
         viewModelScope.launch {
             useCase.getEpisodeByNumber(
                 showId = showId.toInt(),
@@ -41,9 +44,11 @@ class EpisodeDetailsViewModel(
                 _episodeModel.postValue(it)
                 _state.postValue(EpisodeDetailsStates.Success)
             }.onFailure {
-                it.printStackTrace()
+                _state.postValue(EpisodeDetailsStates.Error)
             }
         }
     }
+
+    fun isLoading() = Transformations.map(_state) { it is EpisodeDetailsStates.Loading }
 
 }

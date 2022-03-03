@@ -8,7 +8,7 @@
     <string name="seasons_count">%s Seasons</string>
     <string name="episode_name">%s. %s</string>
     <string name="episode_runtime">%dm</string>
-    <string name="episode_season_and_number">%d: %d</string>
+    <string name="episode_season_and_number">Season %d: Episode %d</string>
     <string name="empty_favorites">You didn\'t add any show to your watch list. \n\nAdd now and stop losing good fun.</string>
     <string name="error">Error</string>
     <string name="error_message">A error happened. Try again later</string>

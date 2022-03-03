@@ -32,10 +32,12 @@
 
         <TextView
             android:id="@+id/textview_name"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="@{@string/episode_name(item.number, item.name)}"
             android:textColor="@color/white"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginEnd="@dimen/size_medium"
             android:layout_marginStart="@dimen/size_medium"
             android:textSize="@dimen/size_14"
             app:layout_constraintBottom_toTopOf="@id/textview_duration"
