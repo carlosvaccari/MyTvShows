@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="visibilityCondition"
+            type="boolean" />
+
+        <variable
+            name="errorListener"
+            type="com.cvaccari.commons.error.ErrorActionsListener" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:background="@color/black"
+        showIf="@{visibilityCondition}"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/imageview_empty"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginTop="@dimen/size_xxxxlarge"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:src="@drawable/ic_series"/>
+
+        <TextView
+            android:id="@+id/textview_error_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/imageview_empty"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:textSize="@dimen/size_14"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:layout_margin="@dimen/size_xxxlarge"
+            app:layout_constraintStart_toStartOf="parent"
+            android:text="@string/error"/>
+
+        <TextView
+            android:id="@+id/textview_error_message"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/textview_error_title"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:textSize="@dimen/size_16"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:layout_margin="@dimen/size_medium"
+            app:layout_constraintStart_toStartOf="parent"
+            android:text="@string/error_message"/>
+
+        <Button
+            android:id="@+id/button_confirm"
+            style="@style/PrimaryButton"
+            android:layout_width="match_parent"
+            android:onClickListener="@{() -> errorListener.onTryAgainClicked()}"
+            android:layout_marginLeft="@dimen/size_medium"
+            android:layout_marginRight="@dimen/size_medium"
+            android:layout_marginBottom="@dimen/size_medium"
+            android:text="@string/try_again"
+            app:layout_constraintBottom_toBottomOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

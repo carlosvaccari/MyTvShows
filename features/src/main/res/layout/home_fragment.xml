@@ -36,6 +36,13 @@
             visibilityCondition="@{viewModel.isLoading()}"
             android:layout_width="match_parent"/>
 
+        <include
+            layout="@layout/error_container"
+            android:layout_height="match_parent"
+            errorListener="@{viewModel.errorActionsListener}"
+            visibilityCondition="@{viewModel.isError()}"
+            android:layout_width="match_parent"/>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>

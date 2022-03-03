@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import androidx.lifecycle.viewModelScope
 import com.cvaccari.commons.base.BaseViewModel
+import com.cvaccari.commons.error.ErrorActionsListener
 import com.cvaccari.commons.utils.SingleLiveEvent
 import com.cvaccari.core_network.networkresponse.onFailure
 import com.cvaccari.core_network.networkresponse.onSuccess
@@ -12,6 +13,7 @@ import com.cvaccari.core_views.stickyrecyclerview.Section
 import com.cvaccari.features.core.listeners.OnEpisodeClickedListener
 import com.cvaccari.features.core.listeners.OnFavoriteClickedListener
 import com.cvaccari.features.favorities.domain.FavoritesUseCase
+import com.cvaccari.features.home.presentation.HomeStates
 import com.cvaccari.features.search.data.model.ShowInfoModel
 import com.cvaccari.features.showdetails.data.model.ShowDetailsModel
 import com.cvaccari.features.showdetails.domain.ShowDetailsUseCase
@@ -23,6 +25,7 @@ import kotlinx.coroutines.launch
 sealed class ShowDetailsStates {
     object Loading : ShowDetailsStates()
     object Success : ShowDetailsStates()
+    object Error : ShowDetailsStates()
     data class ShowEpisodeDetails(val showId: String, val season: Int, val number: Int) : ShowDetailsStates()
 }
 
@@ -54,6 +57,10 @@ class ShowDetailsViewModel(
 
     override fun onCreate() {
         super.onCreate()
+        getShowDetails()
+    }
+
+    private fun getShowDetails() {
         _states.value = ShowDetailsStates.Loading
         viewModelScope.launch {
             useCase.getShowDetails(show.id)
@@ -64,7 +71,7 @@ class ShowDetailsViewModel(
                     _states.value = ShowDetailsStates.Success
                 }
                 .onFailure {
-                    it.printStackTrace()
+                    _states.value = ShowDetailsStates.Error
                 }
         }
 
@@ -88,6 +95,13 @@ class ShowDetailsViewModel(
             _states.postValue(ShowDetailsStates.ShowEpisodeDetails(show.id, item.season, item.number))
         }
     }
+    val errorActionsListener = object : ErrorActionsListener {
+        override fun onTryAgainClicked() {
+            getShowDetails()
+        }
+    }
+
+    fun isError() = Transformations.map(_states) { it is ShowDetailsStates.Error }
 
     fun isLoading() = Transformations.map(_states) { it is ShowDetailsStates.Loading }
 }

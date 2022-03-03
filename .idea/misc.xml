@@ -23,6 +23,7 @@
         <entry key="features/src/main/res/drawable/selector_bottom_navigation.xml" value="0.21822916666666667" />
         <entry key="features/src/main/res/layout/activity_main.xml" value="0.21041666666666667" />
         <entry key="features/src/main/res/layout/episodes_details_fragment.xml" value="0.19166666666666668" />
+        <entry key="features/src/main/res/layout/error_container.xml" value="0.19166666666666668" />
         <entry key="features/src/main/res/layout/favorites_fragment.xml" value="0.2109375" />
         <entry key="features/src/main/res/layout/favorities_empty_fragment.xml" value="0.19166666666666668" />
         <entry key="features/src/main/res/layout/favorities_fragment.xml" value="0.15625" />

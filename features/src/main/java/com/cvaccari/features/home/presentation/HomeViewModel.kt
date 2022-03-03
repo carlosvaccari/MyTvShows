@@ -6,6 +6,7 @@ import androidx.lifecycle.Transformations
 import androidx.lifecycle.viewModelScope
 import com.cvaccari.commons.base.BaseViewModel
 import com.cvaccari.commons.base.State
+import com.cvaccari.commons.error.ErrorActionsListener
 import com.cvaccari.commons.utils.SingleLiveEvent
 import com.cvaccari.core_network.networkresponse.onFailure
 import com.cvaccari.core_network.networkresponse.onSuccess
@@ -14,9 +15,7 @@ import com.cvaccari.features.core.listeners.OnShowClickedListener
 import com.cvaccari.features.favorities.domain.FavoritesUseCase
 import com.cvaccari.features.home.domain.HomeUseCase
 import com.cvaccari.features.search.data.model.ShowInfoModel
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.flatMapMerge
-import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
@@ -25,6 +24,7 @@ sealed class HomeStates : State {
     data class ShowDetails(val item: ShowInfoModel) : HomeStates()
     object Loading : HomeStates()
     object Success : HomeStates()
+    object Error : HomeStates()
 }
 
 class HomeViewModel(
@@ -60,7 +60,6 @@ class HomeViewModel(
     private fun getSeries() {
         _states.postValue(HomeStates.Loading)
 
-
         viewModelScope.launch {
             useCase.getSeries()
                 .onSuccess {
@@ -68,7 +67,7 @@ class HomeViewModel(
                     _showsItems.postValue(it)
                 }
                 .onFailure {
-                    it.printStackTrace()
+                    _states.postValue(HomeStates.Error)
                 }
         }
 
@@ -80,6 +79,14 @@ class HomeViewModel(
             }
             .launchIn(viewModelScope)
     }
+
+    val errorActionsListener = object : ErrorActionsListener {
+        override fun onTryAgainClicked() {
+            getSeries()
+        }
+    }
+
+    fun isError() = Transformations.map(_states) { it is HomeStates.Error }
 
     fun isLoading() = Transformations.map(_states) { it is HomeStates.Loading }
 
