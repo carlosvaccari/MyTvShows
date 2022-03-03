@@ -1,6 +1,6 @@
 package com.cvaccari.features.showdetails.domain
 
-import androidx.core.text.HtmlCompat
+import com.cvaccari.commons.extensions.fromHtml
 import com.cvaccari.core_network.networkresponse.ResultWrapper
 import com.cvaccari.core_views.stickyrecyclerview.Section
 import com.cvaccari.features.showdetails.data.ShowDetailsRepository
@@ -24,7 +24,7 @@ class ShowDetailsUseCaseImpl(
         if (result.isSuccessful()) {
             return formatData(result)
         } else {
-            return ResultWrapper.Error(result.toError().failure)
+            return result.toError()
         }
     }
 
@@ -33,6 +33,7 @@ class ShowDetailsUseCaseImpl(
     ): ResultWrapper.Success<ShowDetailsPresentationModel> {
         val seasonLists = mutableListOf<Section>()
         val seasons = result.toSuccess().value.groupBy { it.season }
+
         seasons.keys.forEach {
             val season = it - 1
             val episodes = seasons[it]
@@ -46,12 +47,9 @@ class ShowDetailsUseCaseImpl(
             )
 
             seasonLists.addAll(
-                episodes.map {
+                episodes.map { showDetailsModel ->
                     ShowSeasonItemSectionModel(
-                        it.copy(summary = HtmlCompat.fromHtml(
-                            it.summary,
-                            HtmlCompat.FROM_HTML_MODE_LEGACY
-                        ).toString()),
+                        showDetailsModel.copy(summary = showDetailsModel.summary.fromHtml()),
                         season
                     )
                 }
@@ -60,12 +58,9 @@ class ShowDetailsUseCaseImpl(
         return ResultWrapper.Success(
             ShowDetailsPresentationModel(
                 seasonsList = seasonLists,
-                name = seasons[1]!![0].name,
-                summary = HtmlCompat.fromHtml(
-                    seasons[1]!![0].summary,
-                    HtmlCompat.FROM_HTML_MODE_LEGACY
-                ),
-                images = seasons[1]!![0].image,
+                name = seasons[1]?.first()?.name.orEmpty(),
+                summary = seasons[1]?.first()?.summary?.fromHtml().orEmpty(),
+                images = seasons[1]?.first()?.image,
                 seasonsCount = seasonLists.filter { it.type() == Section.HEADER }.count(),
             )
         )
