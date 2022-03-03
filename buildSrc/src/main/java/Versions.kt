@@ -11,6 +11,10 @@ object Versions {
         const val okhttp = "4.9.1"
     }
 
+    object Room {
+        const val room = "2.4.0-beta01"
+    }
+
     object Kotlin {
         const val kotlin = "1.5.0"
     }

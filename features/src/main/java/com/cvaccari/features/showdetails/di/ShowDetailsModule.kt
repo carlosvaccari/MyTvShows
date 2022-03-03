@@ -23,7 +23,8 @@ object ShowDetailsModule  {
         viewModel { (show: ShowInfoModel) ->
             ShowDetailsViewModel(
                 show = show,
-                useCase = get()
+                useCase = get(),
+                favoritesUseCase = get()
             )
         }
 

@@ -43,3 +43,11 @@ inline fun <T> ResultWrapper<T>.onSuccess(action: (value: T) -> Unit): ResultWra
     }
     return this
 }
+
+inline fun <T> ResultWrapper<T>.doOnNext(action: (value: T) -> ResultWrapper<T>): ResultWrapper<T>{
+    if (this is ResultWrapper.Success<T>) {
+        return action(value)
+    }
+
+    return this
+}

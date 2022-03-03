@@ -1,5 +1,6 @@
 package com.cvaccari.features.search.data.model
 
+import com.cvaccari.core_local_storage.database.entities.FavoritesEntity
 import java.io.Serializable
 
 data class ShowInfoModel(
@@ -8,5 +9,30 @@ data class ShowInfoModel(
     val type: String,
     val genres: List<String>,
     val image: ShowImagesModel,
-    val summary: String
+    val summary: String,
+    var isFavorite: Boolean = false
 ): Serializable
+
+fun FavoritesEntity.toShowInfoModel(): ShowInfoModel {
+    return ShowInfoModel(
+        id = this.id,
+        name = this.name,
+        type = this.type,
+        genres = this.genres,
+        image = ShowImagesModel(this.imageMedium, this.imageOriginal),
+        summary = this.summary,
+        isFavorite = true
+    )
+}
+
+fun ShowInfoModel.toFavoritiesEntity() : FavoritesEntity {
+    return FavoritesEntity(
+        id = this.id,
+        name = this.name,
+        type = this.type,
+        genres = this.genres,
+        imageMedium = image.medium,
+        imageOriginal = image.original,
+        summary = this.summary
+    )
+}

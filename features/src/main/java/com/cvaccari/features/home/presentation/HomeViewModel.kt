@@ -11,8 +11,14 @@ import com.cvaccari.core_network.networkresponse.onFailure
 import com.cvaccari.core_network.networkresponse.onSuccess
 import com.cvaccari.core_views.recyclerview.PagingRecyclerView
 import com.cvaccari.features.core.listeners.OnShowClickedListener
+import com.cvaccari.features.favorities.domain.FavoritesUseCase
 import com.cvaccari.features.home.domain.HomeUseCase
 import com.cvaccari.features.search.data.model.ShowInfoModel
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.flatMapMerge
+import kotlinx.coroutines.flow.flowOf
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 
 sealed class HomeStates : State {
@@ -22,7 +28,8 @@ sealed class HomeStates : State {
 }
 
 class HomeViewModel(
-    private val useCase: HomeUseCase
+    private val useCase: HomeUseCase,
+    private val favoritesUseCase: FavoritesUseCase
 ) : BaseViewModel() {
 
     private val _states = SingleLiveEvent<HomeStates>()
@@ -52,6 +59,8 @@ class HomeViewModel(
 
     private fun getSeries() {
         _states.postValue(HomeStates.Loading)
+
+
         viewModelScope.launch {
             useCase.getSeries()
                 .onSuccess {
@@ -62,6 +71,14 @@ class HomeViewModel(
                     it.printStackTrace()
                 }
         }
+
+        favoritesUseCase.getFavorites()
+            .flatMapMerge {
+                favoritesUseCase.enrichWithFavorites(_showsItems.value ?: listOf())
+            }.onEach {
+                _showsItems.postValue(it)
+            }
+            .launchIn(viewModelScope)
     }
 
     fun isLoading() = Transformations.map(_states) { it is HomeStates.Loading }

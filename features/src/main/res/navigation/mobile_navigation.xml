@@ -27,9 +27,9 @@
 
     <fragment
         android:id="@+id/navigation_notifications"
-        android:name="com.cvaccari.features.favorities.presentation.FavoritiesFragment"
-        android:label="@string/title_notifications"
-        tools:layout="@layout/favorities_fragment" >
+        android:name="com.cvaccari.features.favorities.presentation.FavoritesFragment"
+        android:label="@string/title_watch_list"
+        tools:layout="@layout/favorites_fragment" >
         <action
             android:id="@+id/action_navigation_notifications_to_navigation_show_details"
             app:destination="@id/navigation_show_details" />

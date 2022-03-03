@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
@@ -19,24 +20,15 @@
             android:background="@android:color/white"
             android:layout_marginEnd="@dimen/size_xxxsmall"
             android:layout_marginBottom="@dimen/size_xxxsmall"
-            android:onClickListener="@{() -> onClickListener.onClicked(showInfo)}"
             android:layout_height="190dp">
 
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:onClickListener="@{() -> onClickListener.onClicked(showInfo)}"
                 android:scaleType="fitXY"
                 srcFromUrl="@{showInfo.image.original}"/>
 
-            <TextView
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                android:layout_width="wrap_content"
-                android:visibility="gone"
-                android:text="@{showInfo.name}"
-                android:layout_height="wrap_content" />
-
         </androidx.constraintlayout.widget.ConstraintLayout>
-<!--    </com.google.android.material.card.MaterialCardView>-->
 
 </layout>

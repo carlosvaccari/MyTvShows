@@ -2,38 +2,37 @@ package com.cvaccari.features.favorities.presentation
 
 import android.os.Bundle
 import android.view.View
+import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.cvaccari.commons.base.BaseFragment
 import com.cvaccari.commons.delegate.dataBinding
 import com.cvaccari.features.R
-import com.cvaccari.features.databinding.FavoritiesFragmentBinding
+import com.cvaccari.features.databinding.FavoritesFragmentBinding
 import com.cvaccari.features.search.data.model.ShowInfoModel
-import com.cvaccari.features.search.di.SearchModule
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class FavoritiesFragment : BaseFragment(R.layout.favorities_fragment) {
+class FavoritesFragment : BaseFragment(R.layout.favorites_fragment) {
 
-    override var module = SearchModule.instance
-    private val viewModel: FavoritiesViewModel by viewModel()
-    private val binding: FavoritiesFragmentBinding by dataBinding()
+    private val viewModel: FavoritesViewModel by viewModel()
+    private val binding: FavoritesFragmentBinding by dataBinding()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.viewModel = viewModel
-        lifecycle.addObserver(viewModel) //TODO maybe we dont need
+        lifecycle.addObserver(viewModel)
         initObservers()
     }
 
     private fun initObservers() {
         viewModel.states.observe(viewLifecycleOwner, Observer {
             when (it) {
-                is FavoritiesStates.ShowDetails -> showDetails(it.item)
+                is FavoritesStates.ShowDetails -> showDetails(it.item)
             }
         })
     }
 
     private fun showDetails(item: ShowInfoModel) {
-        findNavController().navigate(FavoritiesFragmentDirections.actionNavigationNotificationsToNavigationShowDetails(
+        findNavController().navigate(FavoritesFragmentDirections.actionNavigationNotificationsToNavigationShowDetails(
             item
         ))
     }

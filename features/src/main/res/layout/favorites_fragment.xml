@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="viewModel"
+            type="com.cvaccari.features.favorities.presentation.FavoritesViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context="com.cvaccari.features.favorities.presentation.FavoritesFragment">
+
+        <androidx.recyclerview.widget.RecyclerView
+            entries="@{viewModel.showsItems}"
+            onItemClicked="@{viewModel.onItemClicked}"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="@dimen/size_medium"
+            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:spanCount="3" />
+
+        <include
+            layout="@layout/loading_container"
+            android:layout_height="0dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            visibilityCondition="@{viewModel.isLoading}"
+            android:layout_width="match_parent"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

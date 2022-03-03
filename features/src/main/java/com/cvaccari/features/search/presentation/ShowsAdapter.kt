@@ -69,6 +69,6 @@ class ShowsItemDiffCallback : DiffUtil.ItemCallback<ShowInfoModel>() {
     override fun areContentsTheSame(
         oldItem: ShowInfoModel, newItem: ShowInfoModel
     ): Boolean {
-        return oldItem == newItem
+        return oldItem.id == newItem.id
     }
 }

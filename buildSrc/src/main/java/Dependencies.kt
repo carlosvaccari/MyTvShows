@@ -4,6 +4,7 @@ object Dependencies {
 
     object Module {
         const val core_network = ":core-network"
+        const val core_local_storage = ":core-local-storage"
         const val core_views = ":core-views"
         const val commons = ":commons"
         const val features = ":features"
@@ -86,6 +87,12 @@ object Dependencies {
         Module::class.memberProperties.map {
             it.name.replace("_", "-")
         }
+    }
+
+    object Room {
+        const val runtime = "androidx.room:room-runtime:${Versions.Room.room}"
+        const val compiler = "androidx.room:room-compiler:${Versions.Room.room}"
+        const val ktx = "androidx.room:room-ktx:${Versions.Room.room}"
     }
 
     object LibsGroup {

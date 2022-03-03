@@ -12,8 +12,11 @@
         <entry key="features/src/main/res/drawable/bg_white_gradient.xml" value="0.20677083333333332" />
         <entry key="features/src/main/res/drawable/bg_white_rounded.xml" value="0.2265625" />
         <entry key="features/src/main/res/drawable/bottom_navigation_selector.xml" value="0.2171875" />
+        <entry key="features/src/main/res/drawable/favorite_button_state.xml" value="0.22708333333333333" />
         <entry key="features/src/main/res/drawable/ic_placeholder.xml" value="0.20677083333333332" />
         <entry key="features/src/main/res/drawable/ic_series.xml" value="0.21822916666666667" />
+        <entry key="features/src/main/res/drawable/icon_favorite_border.xml" value="0.22708333333333333" />
+        <entry key="features/src/main/res/drawable/icon_favorite_filled.xml" value="0.22708333333333333" />
         <entry key="features/src/main/res/drawable/selector_bottom_navigation.xml" value="0.21822916666666667" />
         <entry key="features/src/main/res/layout/activity_main.xml" value="0.21041666666666667" />
         <entry key="features/src/main/res/layout/favorities_fragment.xml" value="0.15625" />

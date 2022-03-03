@@ -22,6 +22,7 @@ class ShowDetailsFragment: BaseFragment(R.layout.show_details_fragment) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.viewModel = viewModel
+        binding.onClickListener = viewModel.onFavoriteClicked
         lifecycle.addObserver(viewModel)
     }
 }

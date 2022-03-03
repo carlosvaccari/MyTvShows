@@ -9,20 +9,24 @@ import com.cvaccari.commons.utils.SingleLiveEvent
 import com.cvaccari.core_network.networkresponse.onFailure
 import com.cvaccari.core_network.networkresponse.onSuccess
 import com.cvaccari.core_views.stickyrecyclerview.Section
-import com.cvaccari.features.home.presentation.HomeStates
+import com.cvaccari.features.core.listeners.OnFavoriteClickedListener
+import com.cvaccari.features.favorities.domain.FavoritesUseCase
 import com.cvaccari.features.search.data.model.ShowInfoModel
 import com.cvaccari.features.showdetails.domain.ShowDetailsUseCase
 import com.cvaccari.features.showdetails.presentation.model.ShowDetailsPresentationModel
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 
 sealed class ShowDetailsStates {
     object Loading : ShowDetailsStates()
-    object Success: ShowDetailsStates()
+    object Success : ShowDetailsStates()
 }
 
 class ShowDetailsViewModel(
     private val show: ShowInfoModel,
-    private val useCase: ShowDetailsUseCase
+    private val useCase: ShowDetailsUseCase,
+    private val favoritesUseCase: FavoritesUseCase
 ) : BaseViewModel() {
 
     private var _states = SingleLiveEvent<ShowDetailsStates>()
@@ -41,6 +45,10 @@ class ShowDetailsViewModel(
     val showName: LiveData<String>
         get() = _showName
 
+    private var _isFavorite= MutableLiveData<Boolean>()
+    val isFavorite: LiveData<Boolean>
+        get() = _isFavorite
+
     override fun onCreate() {
         super.onCreate()
         _states.value = ShowDetailsStates.Loading
@@ -55,6 +63,20 @@ class ShowDetailsViewModel(
                 .onFailure {
                     it.printStackTrace()
                 }
+        }
+
+        favoritesUseCase.getFavoriteById(show.id.toInt())
+            .onEach {
+                show.isFavorite = it?.isFavorite ?: false
+                _isFavorite.postValue(it?.isFavorite)
+            }.launchIn(viewModelScope)
+    }
+
+    val onFavoriteClicked = object : OnFavoriteClickedListener {
+        override fun onAddToFavorite() {
+            viewModelScope.launch {
+                favoritesUseCase.handleFavorite(show)
+            }
         }
     }
 

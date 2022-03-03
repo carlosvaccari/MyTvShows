@@ -6,9 +6,9 @@ import com.cvaccari.features.home.data.HomeRepositoryImpl
 import com.cvaccari.features.home.domain.HomeUseCase
 import com.cvaccari.features.home.domain.HomeUseCaseImpl
 import com.cvaccari.features.home.presentation.HomeViewModel
+import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 import retrofit2.Retrofit
-import org.koin.androidx.viewmodel.dsl.viewModel
 
 object HomeModule {
 
@@ -16,7 +16,8 @@ object HomeModule {
 
         viewModel {
             HomeViewModel(
-                useCase = get()
+                useCase = get(),
+                favoritesUseCase = get()
             )
         }
 

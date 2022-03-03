@@ -7,6 +7,9 @@
         <variable
             name="viewModel"
             type="com.cvaccari.features.showdetails.presentation.ShowDetailsViewModel" />
+        <variable
+            name="onClickListener"
+            type="com.cvaccari.features.core.listeners.OnFavoriteClickedListener" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -53,6 +56,18 @@
             app:layout_constraintTop_toBottomOf="@id/textview_title"
             app:layout_constraintStart_toStartOf="@id/textview_title"
             android:text="@{@string/seasons_count(viewModel.showDetails.seasonsCount)}"/>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/imageview_banner"
+            app:layout_constraintEnd_toEndOf="parent"
+            onStateChanged="@{viewModel.isFavorite()}"
+            android:onClickListener="@{() -> onClickListener.onAddToFavorite()}"
+            android:layout_marginTop="@dimen/size_medium"
+            android:layout_marginEnd="@dimen/size_small"
+            tools:src="@drawable/icon_favorite_filled"
+            android:background="@drawable/favorite_button_state"/>
 
         <com.cvaccari.core_views.stickyrecyclerview.RecyclerViewStickyHeader
             android:layout_width="match_parent"

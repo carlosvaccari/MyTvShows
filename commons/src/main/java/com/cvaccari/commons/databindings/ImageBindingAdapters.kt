@@ -8,3 +8,8 @@ import com.cvaccari.commons.extensions.loadImageByUrl
 fun ImageView.srcFromUrl(imageUrl: String?) {
     imageUrl?.let { loadImageByUrl(it) }
 }
+
+@BindingAdapter("onStateChanged")
+fun ImageView.bindOnStateChanged(boolean: Boolean) {
+    this.isSelected = boolean
+}
