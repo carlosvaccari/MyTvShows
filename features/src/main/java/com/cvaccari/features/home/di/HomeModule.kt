@@ -16,7 +16,7 @@ object HomeModule {
 
         viewModel {
             HomeViewModel(
-                useCase = get(),
+                homeUseCase = get(),
                 favoritesUseCase = get()
             )
         }

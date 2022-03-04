@@ -17,6 +17,7 @@ import kotlinx.coroutines.launch
 sealed class SearchStates {
     object Loading : SearchStates()
     object Success : SearchStates()
+    object Error : SearchStates()
     data class ShowDetails(val item : ShowInfoModel): SearchStates()
 }
 
@@ -47,7 +48,7 @@ class SearchViewModel(
                     _states.value = SearchStates.Success
                 }
                 .onFailure {
-
+                    _states.value = SearchStates.Error
                 }
         }
     }
@@ -58,4 +59,6 @@ class SearchViewModel(
     )
 
     fun isLoading() = Transformations.map(_states) { it is SearchStates.Loading }
+
+    fun isError() = Transformations.map(_states) { it is SearchStates.Error}
 }

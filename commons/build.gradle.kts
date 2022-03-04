@@ -27,6 +27,9 @@ dependencies {
     implementation(Dependencies.AndroidX.androidxCore)
     implementation(Dependencies.AndroidX.v7)
     implementation(Dependencies.UnitTest.mockk)
+    implementation(Dependencies.UnitTest.espressoContrib)
+    implementation(Dependencies.UnitTest.espressoCore)
+    implementation(Dependencies.UnitTest.espressoIntents)
     Dependencies.LibsGroup.koin.forEach { implementation(it) }
     testImplementation(Dependencies.UnitTest.junit)
 }

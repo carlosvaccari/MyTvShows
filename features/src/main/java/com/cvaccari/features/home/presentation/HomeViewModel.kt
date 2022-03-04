@@ -28,7 +28,7 @@ sealed class HomeStates : State {
 }
 
 class HomeViewModel(
-    private val useCase: HomeUseCase,
+    private val homeUseCase: HomeUseCase,
     private val favoritesUseCase: FavoritesUseCase
 ) : BaseViewModel() {
 
@@ -61,7 +61,7 @@ class HomeViewModel(
         _states.postValue(HomeStates.Loading)
 
         viewModelScope.launch {
-            useCase.getSeries()
+            homeUseCase.getSeries()
                 .onSuccess {
                     _states.postValue(HomeStates.Success)
                     _showsItems.postValue(it)
