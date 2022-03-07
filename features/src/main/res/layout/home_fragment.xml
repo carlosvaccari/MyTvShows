@@ -25,7 +25,7 @@
             onItemClicked="@{viewModel.onItemClicked}"
             bindListener="@{viewModel.listPagingListener}"
             app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-            app:spanCount="3"
+            app:spanCount="@integer/show_list_span_count"
             android:layout_marginStart="@dimen/size_xsmall"
             android:layout_marginEnd="@dimen/size_xsmall"
             app:layout_constraintBottom_toBottomOf="parent"

@@ -23,5 +23,6 @@
     <!-- endregion Font Sizes -->
 
     <dimen name="button_height">60dp</dimen>
+    <dimen name="big_icon_size">100dp</dimen>
 
 </resources>

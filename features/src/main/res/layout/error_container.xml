@@ -14,6 +14,7 @@
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/error_container_root"
         android:layout_width="match_parent"
         android:background="@color/black"
         showIf="@{visibilityCondition}"
@@ -21,8 +22,8 @@
 
         <ImageView
             android:id="@+id/imageview_empty"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:layout_width="@dimen/big_icon_size"
+            android:layout_height="@dimen/big_icon_size"
             android:layout_marginTop="@dimen/size_xxxxlarge"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

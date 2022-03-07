@@ -10,8 +10,6 @@
         android:id="@+id/nav_view"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="0dp"
-        android:layout_marginEnd="0dp"
         android:background="@color/black_80"
         app:itemIconTint="@drawable/selector_bottom_navigation"
         app:itemTextColor="@drawable/selector_bottom_navigation"
@@ -23,6 +21,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/container_actions"
         android:layout_width="match_parent"
+        app:layout_constraintTop_toTopOf="parent"
         android:layout_height="wrap_content">
 
         <TextView
@@ -35,7 +34,7 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             android:layout_margin="@dimen/size_medium"
-            android:text="LeFlix"/>
+            android:text="@string/app_name"/>
 
         <ImageView
             android:id="@+id/imageview_back"
@@ -45,7 +44,6 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             android:src="@drawable/ic_back"/>
-
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

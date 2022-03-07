@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="app_name">LeFlix</string>
     <string name="title_home">Series</string>
     <string name="title_search">Search</string>
     <string name="title_watch_list">My List</string>
