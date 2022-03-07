@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="notification_titles">
+        <item>It\'s FRIDAAAY</item>
+        <item>Let\'s have some fun</item>
+        <item>Do you have popcorn?</item>
+    </string-array>
+
+    <string-array name="notification_messages">
+        <item>Come to bed!</item>
+        <item>We have a lot of shows to catch up</item>
+        <item>Cause I brought you shows</item>
+    </string-array>
+
+</resources>
