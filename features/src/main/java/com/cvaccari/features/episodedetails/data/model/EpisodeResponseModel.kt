@@ -9,6 +9,6 @@ data class EpisodeResponseModel(
     val season: Int,
     val number: Int,
     val type: String,
-    val image: ShowImagesModel,
+    val image: ShowImagesModel?,
     val summary: String
 )

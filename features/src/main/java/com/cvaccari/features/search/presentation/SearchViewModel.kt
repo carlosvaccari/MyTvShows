@@ -41,6 +41,7 @@ class SearchViewModel(
 
     private fun onQueryChanged(query: String) {
         _states.value = SearchStates.Loading
+        _showsItems.value = listOf()
         viewModelScope.launch {
             useCase.querySeries(query)
                 .onSuccess {

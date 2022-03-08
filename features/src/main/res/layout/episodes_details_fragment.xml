@@ -10,56 +10,63 @@
             type="com.cvaccari.features.episodedetails.presentation.EpisodeDetailsViewModel" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/episode_details_root"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/black">
+        android:fillViewport="true"
+        android:layout_height="match_parent">
 
-        <ImageView
-            android:id="@+id/imageview_banner"
-            srcFromUrl="@{viewModel.episodeModel.image.medium}"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/episode_details_root"
             android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:scaleType="fitXY"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:src="@drawable/ic_placeholder" />
-
-        <TextView
-            android:id="@+id/textview_episode_number"
-            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/size_medium"
-            android:layout_marginTop="@dimen/size_medium"
-            android:text="@{@string/episode_season_and_number(viewModel.episodeModel.season, viewModel.episodeModel.number)}"
-            android:textColor="@color/white_70"
-            android:textSize="@dimen/size_12"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/imageview_banner" />
+            android:background="@color/black">
 
-        <TextView
-            android:id="@+id/textview_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/size_medium"
-            android:text="@{viewModel.episodeModel.name}"
-            android:textColor="@color/white"
-            android:textSize="@dimen/size_20"
-            android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/textview_episode_number" />
+            <ImageView
+                android:id="@+id/imageview_banner"
+                srcFromUrl="@{viewModel.episodeModel.image.medium}"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:scaleType="fitXY"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:src="@drawable/ic_placeholder" />
 
-        <TextView
-            android:id="@+id/textview_summary"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/size_medium"
-            android:text="@{viewModel.episodeModel.summary}"
-            android:textColor="@color/white"
-            android:textSize="@dimen/size_14"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/textview_name" />
+            <TextView
+                android:id="@+id/textview_episode_number"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/size_medium"
+                android:layout_marginTop="@dimen/size_medium"
+                android:text="@{@string/episode_season_and_number(viewModel.episodeModel.season, viewModel.episodeModel.number)}"
+                android:textColor="@color/white_70"
+                android:textSize="@dimen/size_12"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/imageview_banner" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <TextView
+                android:id="@+id/textview_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/size_medium"
+                android:text="@{viewModel.episodeModel.name}"
+                android:textColor="@color/white"
+                android:textSize="@dimen/size_20"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/textview_episode_number" />
+
+            <TextView
+                android:id="@+id/textview_summary"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/size_medium"
+                android:text="@{viewModel.episodeModel.summary}"
+                android:textColor="@color/white"
+                android:textSize="@dimen/size_14"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/textview_name" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+
 </layout>
