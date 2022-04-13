@@ -7,6 +7,7 @@ buildscript {
         classpath(Config.AndroidClassPath.kotlin_plugin)
         classpath(Config.AndroidClassPath.gradle_plugin)
         classpath(Config.AndroidClassPath.safeArgs)
+        classpath(Config.AndroidClassPath.detekt_plugin)
     }
 }
 
@@ -30,6 +31,8 @@ fun Project.configureAndroid() {
     apply(plugin = "kotlin-android")
     apply(plugin = "kotlin-kapt")
     apply(plugin = "kotlin-parcelize")
+//    apply(from = "$rootDir/detekt.gradle")
+
 
     configure<com.android.build.gradle.BaseExtension> {
         compileSdkVersion(Config.GradleConfigData.compileSdkVersion)

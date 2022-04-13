@@ -1,0 +1,102 @@
+configurations { detekt }
+
+dependencies {
+    detekt "io.gitlab.arturbosch.detekt:detekt-cli:$detekt_version"
+    detekt "io.gitlab.arturbosch.detekt:detekt-formatting:$detekt_version"
+}
+
+task detektVCS(type: JavaExec, group: "verification") {
+    description = "Run Kotlin static analysis on changed files."
+    group = "verification"
+    main = "io.gitlab.arturbosch.detekt.cli.Main"
+    classpath = configurations.detekt
+
+    doFirst {
+        def changedFilesList = getDiffedFilesFromBranch(getCurrentBranch(), "$rootDir")
+
+        if (changedFilesList.isEmpty()) {
+            println("No kotlin files changed! Skipping task...")
+            // forces detekt to ignore all files
+            changedFilesList = "$rootDir/gradle"
+        } else {
+            println("Running detekt on the changed files:")
+            println(changedFilesList)
+        }
+
+        def reportDir = "${buildDir}/reports/detekt"
+        def params = [
+                "--input", "$changedFilesList",
+                "--config", "$rootDir/config/detekt/detekt.yml",
+                "--report", "xml:$reportDir/detekt-checkstyle.xml",
+                "--report", "html:$reportDir/report.html"
+        ]
+        args(params)
+        return 1
+    }
+}
+
+private static String getDiffedFilesFromBranch(String branch, String dir) {
+    def outputStream = new ByteArrayOutputStream()
+    def cmd = getDiffCmd(branch)
+    execute(cmd, outputStream)
+
+    if (outputStream.toString().isEmpty()) return ""
+    // get comma separated string of files
+    def paths = filterPaths(outputStream.toString()
+            .trim()
+            .replace("\n", ",$dir/"))
+
+    return paths
+}
+
+private static String filterPaths(String paths) {
+
+    def changedFiles = ""
+
+    def pathsList = paths.split(",").findAll {
+        new File(it).exists()
+    }
+
+    pathsList.eachWithIndex { item, index ->
+        changedFiles += item
+        if (index < pathsList.size() -1) {
+            changedFiles += ","
+        }
+    }
+
+    return changedFiles
+}
+
+private static String getCurrentBranch() {
+    def outputStream = new ByteArrayOutputStream()
+    def cmd = "git rev-parse --abbrev-ref HEAD"
+    execute(cmd, outputStream)
+
+    return outputStream.toString()
+            .trim()
+
+}
+
+private static String getDiffCmd(String branch) {
+    def currentBranchFirstCommit = getFirstCommitFromCurrentBranch(branch)
+    def target = hasUpstreamConfigured(branch) ? "origin/$branch" : currentBranchFirstCommit
+    return "git log --diff-filter=d --name-only --first-parent --no-merges $currentBranchFirstCommit..$target | grep -e .kt\$ | sort -u"
+}
+
+private static boolean hasUpstreamConfigured(String branch) {
+    def outputStream = new ByteArrayOutputStream()
+    def cmd = "git ls-remote --head origin ${branch} | grep -q ${branch} && echo true || echo false"
+    execute(cmd, outputStream)
+    return outputStream.toString().toBoolean()
+}
+
+private static String getFirstCommitFromCurrentBranch(String branch) {
+    def outputStream = new ByteArrayOutputStream()
+    def firstCommitCmd = "git reflog show --no-abbrev ${branch} | tail -1 | grep -Eo '^[^ ]+'"
+    execute(firstCommitCmd, outputStream)
+    return outputStream.toString().trim()
+}
+
+private static def execute(cmd, output) {
+    ['sh', '-c', cmd].execute().waitForProcessOutput(output, System.err)
+}

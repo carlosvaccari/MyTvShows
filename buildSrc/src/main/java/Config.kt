@@ -4,6 +4,8 @@ object Config {
         const val kotlin_plugin = "org.jetbrains.kotlin:kotlin-gradle-plugin:${Versions.ClassPath.kotlinPlugin}"
         const val gradle_plugin = "com.android.tools.build:gradle:${Versions.ClassPath.gradle_plugin}"
         const val safeArgs = "androidx.navigation:navigation-safe-args-gradle-plugin:${Versions.Navigation.core}"
+        const val detekt_plugin = "io.gitlab.arturbosch.detekt:detekt-gradle-plugin:${Versions.ClassPath.detekt_plugin}"
+        const val gradle_versions = "com.github.ben-manes:gradle-versions-plugin:${Versions.ClassPath.gradle_versions}"
     }
 
     object GradleConfigData {
