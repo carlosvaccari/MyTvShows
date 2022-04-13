@@ -33,7 +33,7 @@ fun AlarmManager.setReminder(context: Context, cls: Class<*>?, hour: Int, min: I
     val pendingIntent = PendingIntent.getBroadcast(
         context,
         WEEKLY_REMINDER_REQUEST_CODE, intent1,
-        PendingIntent.FLAG_UPDATE_CURRENT
+        PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_MUTABLE
     )
     val am = context.getSystemService(ALARM_SERVICE) as AlarmManager
     am.setInexactRepeating(
@@ -54,7 +54,7 @@ private fun cancelReminder(context: Context, cls: Class<*>?) {
     val intent1 = Intent(context, cls)
     val pendingIntent = PendingIntent.getBroadcast(
         context,
-        WEEKLY_REMINDER_REQUEST_CODE, intent1, PendingIntent.FLAG_UPDATE_CURRENT
+        WEEKLY_REMINDER_REQUEST_CODE, intent1, PendingIntent.FLAG_MUTABLE
     )
     val am = context.getSystemService(ALARM_SERVICE) as AlarmManager
     am.cancel(pendingIntent)

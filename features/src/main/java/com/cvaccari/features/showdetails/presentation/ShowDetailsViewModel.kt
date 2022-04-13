@@ -51,6 +51,10 @@ class ShowDetailsViewModel(
     val showName: LiveData<String>
         get() = _showName
 
+    private var _webChannel = MutableLiveData<String>()
+    val webchannel: LiveData<String>
+        get() = _webChannel
+
     private var _isFavorite= MutableLiveData<Boolean>()
     val isFavorite: LiveData<Boolean>
         get() = _isFavorite
@@ -66,6 +70,7 @@ class ShowDetailsViewModel(
             useCase.getShowDetails(show.id)
                 .onSuccess {
                     _showName.value = show.name
+                    _webChannel.value = show.webChannel?.name
                     _seasonsList.value = it.seasonsList
                     _showDetails.value = it
                     _states.value = ShowDetailsStates.Success

@@ -12,5 +12,8 @@ data class FavoritesEntity(
     @ColumnInfo(name = "genres") val genres: List<String>,
     @ColumnInfo(name = "imageMedium") val imageMedium: String? = null,
     @ColumnInfo(name = "imageOriginal") val imageOriginal: String? = null,
+    @ColumnInfo(name = "webChannelId") val webChannelId: Int,
+    @ColumnInfo(name = "webChannelName") val webChannelName: String,
+    @ColumnInfo(name = "webChannelCountry") val webChannelCountry: String,
     @ColumnInfo(name = "summary") val summary: String
 )

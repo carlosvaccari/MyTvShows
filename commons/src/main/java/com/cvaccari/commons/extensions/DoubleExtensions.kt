@@ -6,7 +6,7 @@ private const val LOW_DEGREE_PREFIX = "L: "
 private const val HIGH_DEGREE_PREFIX = "H: "
 private const val DEGREE_SUFIX = "°"
 
-fun Double.toDegree() = "${toInt()}$DEGREE_SUFIX"
+fun Double.toDegree() = "${toInt()}$DEGREE_SUFIX --"
 
 fun Double.toLowDegree() = "$LOW_DEGREE_PREFIX${toDegree()}"
 

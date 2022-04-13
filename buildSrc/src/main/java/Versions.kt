@@ -2,8 +2,9 @@ object Versions {
 
     object ClassPath {
         const val kotlinPlugin = "1.5.0"
-        const val gradle_versions = "0.39.0"
-        const val gradle_plugin = "7.0.1"
+        const val gradle_versions = "0.42.0"
+        const val gradle_plugin = "7.1.2"
+        const val detekt_plugin = "1.19.0"
     }
 
     object Network {

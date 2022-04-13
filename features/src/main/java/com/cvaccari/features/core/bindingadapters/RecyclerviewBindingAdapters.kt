@@ -73,7 +73,8 @@ fun RecyclerView.provideEpisodesAdapter(
                 id = it.id.toString(),
                 type = "",
                 genres = listOf(),
-                summary = ""
+                summary = "",
+                webChannel = null
 
             )
         }

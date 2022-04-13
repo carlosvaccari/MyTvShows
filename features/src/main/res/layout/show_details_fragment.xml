@@ -104,6 +104,7 @@
                         android:textSize="@dimen/size_12" />
 
                     <ImageView
+                        android:id="@+id/imageview_favorite"
                         onStateChanged="@{viewModel.isFavorite()}"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -116,6 +117,13 @@
                         app:layout_constraintTop_toTopOf="@id/textview_title"
                         app:layout_constraintBottom_toBottomOf="@id/textview_seasons_count"
                         tools:src="@drawable/icon_favorite_filled" />
+
+                    <TextView
+                        app:layout_constraintTop_toBottomOf="@id/imageview_favorite"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        android:text="@{viewModel.webchannel}"/>
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
             </com.google.android.material.appbar.AppBarLayout>
@@ -136,12 +144,14 @@
         <include
             layout="@layout/loading_container"
             android:layout_height="match_parent"
+            tools:visibility="gone"
             visibilityCondition="@{viewModel.isLoading()}"
             android:layout_width="match_parent"/>
 
         <include
             layout="@layout/error_container"
             android:layout_height="match_parent"
+            tools:visibility="gone"
             errorListener="@{viewModel.errorActionsListener}"
             visibilityCondition="@{viewModel.isError()}"
             android:layout_width="match_parent"/>
