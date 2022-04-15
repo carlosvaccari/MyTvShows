@@ -2,10 +2,12 @@ buildscript {
     repositories {
         google()
         mavenCentral()
+        gradlePluginPortal()
     }
     dependencies {
         classpath(Config.AndroidClassPath.kotlin_plugin)
         classpath(Config.AndroidClassPath.gradle_plugin)
+        classpath(Config.AndroidClassPath.gradle_versions)
         classpath(Config.AndroidClassPath.safeArgs)
         classpath(Config.AndroidClassPath.detekt_plugin)
     }
@@ -22,6 +24,8 @@ allprojects {
 fun Project.configureAndroid() {
     val isAppModule = name == "app"
 
+    println(">>>>>> $name")
+
     when {
         isAppModule -> configureAppAndroid()
         Dependencies.modules.contains(name) -> configureAndroidLibrary()
@@ -31,7 +35,10 @@ fun Project.configureAndroid() {
     apply(plugin = "kotlin-android")
     apply(plugin = "kotlin-kapt")
     apply(plugin = "kotlin-parcelize")
-//    apply(from = "$rootDir/detekt.gradle")
+    apply(plugin = "com.github.ben-manes.versions")
+    apply(plugin = "androidx.navigation.safeargs.kotlin")
+    apply(from = "$rootDir/.githooks/apply-git-hooks.gradle")
+    apply(from = "$rootDir/detekt.gradle")
 
 
     configure<com.android.build.gradle.BaseExtension> {
@@ -122,4 +129,6 @@ fun Project.configureAppAndroid() {
 }
 
 fun Project.configureAndroidLibrary() = apply(plugin = "com.android.library")
+
+tasks.register("clean").configure { delete("build") }
 

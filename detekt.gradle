@@ -1,8 +1,8 @@
 configurations { detekt }
 
 dependencies {
-    detekt "io.gitlab.arturbosch.detekt:detekt-cli:$detekt_version"
-    detekt "io.gitlab.arturbosch.detekt:detekt-formatting:$detekt_version"
+    detekt "io.gitlab.arturbosch.detekt:detekt-cli:1.19.0"
+    detekt "io.gitlab.arturbosch.detekt:detekt-formatting:1.19.0"
 }
 
 task detektVCS(type: JavaExec, group: "verification") {
