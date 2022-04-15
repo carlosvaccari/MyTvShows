@@ -70,7 +70,7 @@ class ShowDetailsViewModel(
             useCase.getShowDetails(show.id)
                 .onSuccess {
                     _showName.value = show.name
-                    _webChannel.value = show.webChannel?.name
+                    _webChannel.value = show.webChannel?.name.orEmpty()
                     _seasonsList.value = it.seasonsList
                     _showDetails.value = it
                     _states.value = ShowDetailsStates.Success

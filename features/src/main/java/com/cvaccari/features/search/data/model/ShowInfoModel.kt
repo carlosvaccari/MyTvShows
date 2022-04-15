@@ -11,6 +11,7 @@ data class ShowInfoModel(
     val image: ShowImagesModel? = null,
     val summary: String?,
     val webChannel: WebChannelModel? = null,
+    val _embedded: EmbededModel? = null,
     var isFavorite: Boolean = false,
 ): Serializable
 

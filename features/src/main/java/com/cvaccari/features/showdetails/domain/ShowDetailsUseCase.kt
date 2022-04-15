@@ -3,6 +3,7 @@ package com.cvaccari.features.showdetails.domain
 import com.cvaccari.commons.extensions.fromHtml
 import com.cvaccari.core_network.networkresponse.ResultWrapper
 import com.cvaccari.core_views.stickyrecyclerview.Section
+import com.cvaccari.features.search.data.model.ShowInfoModel
 import com.cvaccari.features.showdetails.data.ShowDetailsRepository
 import com.cvaccari.features.showdetails.data.model.ShowDetailsModel
 import com.cvaccari.features.showdetails.presentation.model.ShowDetailsPresentationModel
@@ -29,10 +30,11 @@ class ShowDetailsUseCaseImpl(
     }
 
     private fun formatData(
-        result: ResultWrapper<List<ShowDetailsModel>>
+        result: ResultWrapper<ShowInfoModel>
     ): ResultWrapper.Success<ShowDetailsPresentationModel> {
+        val value = result.toSuccess().value
         val seasonLists = mutableListOf<Section>()
-        val seasons = result.toSuccess().value.groupBy { it.season }
+        val seasons = value._embedded!!.episodes.groupBy { it.season }
 
         seasons.keys.forEach {
             val season = it - 1
@@ -61,6 +63,7 @@ class ShowDetailsUseCaseImpl(
                 name = seasons[1]?.first()?.name.orEmpty(),
                 summary = seasons[1]?.first()?.summary?.fromHtml().orEmpty(),
                 images = seasons[1]?.first()?.image,
+                genres = value.genres,
                 seasonsCount = seasonLists.filter { it.type() == Section.HEADER }.count(),
             )
         )
