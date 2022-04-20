@@ -20,19 +20,3 @@
 * Show details
 * Episode details
 * Favorites
-
-
-
-### Design link with milestones
-* https://whimsical.com/leflix-6Y35WEnzwswo23WyCfTuoT
-
-
-### Mileston Schedule:
-* Configure network request -> 28/02
-* Requesting info from api -> 28/02
-* Load images from network -> 01/02
-* Configure local storage -> 02/03
-* Configure notifications -> 07/03
-* Configure splash screen motion layout -> 07/03
-* Arch, resources, layout -> 28/02 - 07/03
-
