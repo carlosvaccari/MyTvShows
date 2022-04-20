@@ -16,22 +16,31 @@
         android:background="@android:color/black"
         tools:context="com.cvaccari.features.home.presentation.HomeFragment">
 
+        <include
+            android:id="@+id/container_whats_new"
+            showInfo="@{viewModel.whatsNew}"
+            visibilityCondition="@{viewModel.shouldShowWhatsNew}"
+            layout="@layout/home_whats_new_container"/>
+
         <com.cvaccari.core_views.recyclerview.PagingRecyclerView
             android:id="@+id/recyclerview_home"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             entries="@{viewModel.showsItems}"
-            android:layout_marginTop="@dimen/size_xxsmall"
+            android:layout_marginTop="@dimen/size_16"
             onItemClicked="@{viewModel.onItemClicked}"
             bindListener="@{viewModel.listPagingListener}"
             app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
             app:spanCount="@integer/show_list_span_count"
             android:layout_marginStart="@dimen/size_xsmall"
             android:layout_marginEnd="@dimen/size_xsmall"
+            tools:itemCount="20"
+            tools:listitem="@layout/show_info_item"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@id/container_whats_new" />
 
         <include
+            android:visibility="gone"
             layout="@layout/loading_container"
             android:layout_height="match_parent"
             visibilityCondition="@{viewModel.isLoading()}"
@@ -40,6 +49,7 @@
         <include
             android:id="@+id/home_error_container"
             layout="@layout/error_container"
+            android:visibility="gone"
             android:layout_height="match_parent"
             errorListener="@{viewModel.errorActionsListener}"
             visibilityCondition="@{viewModel.isError()}"

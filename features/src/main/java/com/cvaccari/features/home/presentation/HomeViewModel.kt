@@ -22,6 +22,7 @@ import kotlinx.coroutines.launch
 
 sealed class HomeStates : State {
     data class ShowDetails(val item: ShowInfoModel) : HomeStates()
+    data class ShowWhatsNew(val item: ShowInfoModel): HomeStates()
     object Loading : HomeStates()
     object Success : HomeStates()
     object Error : HomeStates()
@@ -40,6 +41,14 @@ class HomeViewModel(
     val showsItems: LiveData<List<ShowInfoModel>>
         get() = _showsItems
 
+    private val _whatsNew = MutableLiveData<ShowInfoModel>()
+    val whatsNew: LiveData<ShowInfoModel>
+        get() = _whatsNew
+
+    private val _shouldShowWhatsNew = MutableLiveData<Boolean>()
+    val shouldShowWhatsNew: LiveData<Boolean>
+        get() = _shouldShowWhatsNew
+
     val listPagingListener = object : PagingRecyclerView.LoadMoreListener {
         override fun loadMore() {
             getSeries()
@@ -55,6 +64,17 @@ class HomeViewModel(
     override fun onCreate() {
         super.onCreate()
         getSeries()
+        getWhatsNew()
+    }
+
+    private fun getWhatsNew() {
+        viewModelScope.launch {
+            homeUseCase.getWhatsNew()
+                .onSuccess {
+                    _whatsNew.value = it
+                    _shouldShowWhatsNew.value = true
+                }
+        }
     }
 
     private fun getSeries() {
